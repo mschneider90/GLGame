@@ -1,0 +1,4 @@
+# ignore all of the crap in here
+*
+# except me!
+!.gitignore
