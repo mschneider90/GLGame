@@ -9,11 +9,12 @@ int main(int argc, char** argv)
     const int EXIT_FAIL = 1;
 
     if (argc > 1) {
-        std::cout << "Ignoring command line arguments..." << std::endl;
+        std::cerr << "Ignoring command line arguments..." << std::endl;
     }
 
     try {
         Game g;
+        g.play();
     }
     catch (const std::runtime_error& e) {
         std::cerr << "Error: " << e.what() << std::endl;
