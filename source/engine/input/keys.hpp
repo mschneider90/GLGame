@@ -1,7 +1,7 @@
 #ifndef KEYS_HPP
 #define KEYS_HPP
 
-namespace glEngine
+namespace gle
 {
 
 enum class Keys : std::int16_t
