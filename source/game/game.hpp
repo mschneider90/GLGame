@@ -1,3 +1,6 @@
+#ifndef GAME_HPP
+#define GAME_HPP
+
 #include "engine/graphics/graphics.hpp"
 
 class Game
@@ -9,3 +12,5 @@ public:
 private:
     Graphics gfx;
 };
+
+#endif
