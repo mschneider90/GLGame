@@ -5,8 +5,8 @@ Dependencies:
     OpenGL
     GLFW
     GLEW
-    OpenAL
-    libpng
+    OpenAL (later)
+    libpng (later)
     ...probably more
 
 Installation/Compilation:
