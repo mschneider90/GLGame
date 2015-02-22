@@ -9,7 +9,12 @@ bool Initializer::init = false;
 
 Initializer::Initializer()
 {
-    if (init || !glfwInit()) {
+    // Make sure to check that init is false to prevent double initialization (even though I don't think
+    // GLFW would mind, if you're double initializing you're probably being retarded)
+    if (init) {
+        throw std::runtime_error("initializer: glfw already initialized");
+    }
+    if (!glfwInit()) {
         throw std::runtime_error("initializer: glfw initialization failed");
     }
     init = true;
@@ -17,7 +22,9 @@ Initializer::Initializer()
 
 Initializer::~Initializer()
 {
-    glfwTerminate();
+    if (init) {
+        glfwTerminate();
+    }
 }
 
 bool Initializer::isInit()
