@@ -13,11 +13,10 @@ int main(int argc, char** argv)
     }
 
     try {
-        Game g;
-        g.play();
+        Game::play();
     }
     catch (const std::runtime_error& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Error - " << e.what() << std::endl;
         return EXIT_FAIL;
     }
 

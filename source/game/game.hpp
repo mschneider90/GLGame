@@ -2,15 +2,15 @@
 #define GAME_HPP
 
 #include "engine/graphics/graphics.hpp"
+#include "engine/input/input.hpp"
 
 class Game
 {
 public:
-    Game();
-    ~Game();
-    void play();
+    static void play();
 private:
-    Graphics gfx;
+    Game() {};
+    ~Game() {};
 };
 
 #endif

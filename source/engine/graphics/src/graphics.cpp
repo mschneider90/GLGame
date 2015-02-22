@@ -1,5 +1,6 @@
 #include "engine/graphics/graphics.hpp"
 #include "engine/util/resolution.hpp"
+#include "engine/util/initializer.hpp"
 
 // OpenGL headers live here
 #include <GL/glew.h>
@@ -11,14 +12,13 @@
 
 Graphics::Graphics() : window(nullptr)
 {
-    if (!glfwInit()) {
-        throw std::runtime_error("graphics: OpenGL initialization failed");
+    if (!Initializer::isInit()) {
+        throw std::runtime_error("graphics: Engine not initialized");
     }
 }
 
 Graphics::~Graphics()
 {
-    glfwTerminate();
 }
 
 void Graphics::openWindow(const std::string& title, const Resolution& res)

@@ -1,1 +1,1 @@
-subdirs(graphics)
+subdirs(graphics sound input util)
