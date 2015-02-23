@@ -20,7 +20,6 @@
 Now build/GLGame should be generated.
 
 ##Documentation
-Documentation may be generated with Doxygen.
 0. Go to the docs folder
   * `cd docs`
 1. Run doxygen
