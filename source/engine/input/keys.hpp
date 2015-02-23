@@ -1,10 +1,11 @@
 #ifndef KEYS_HPP
 #define KEYS_HPP
 
-namespace engine
-{
+#include "engine/util/glfw.hpp"
 
-enum class Key : std::int16_t
+#include <cstdint>
+
+enum class Key : int
 {
     A = GLFW_KEY_A,
     B = GLFW_KEY_B,
@@ -42,11 +43,10 @@ enum class Key : std::int16_t
     SEVEN = GLFW_KEY_7,
     EIGHT = GLFW_KEY_8,
     NINE = GLFW_KEY_9,
-    ESC = GLFW_KEY_ESC,
+    ESC = GLFW_KEY_ESCAPE,
     SPACE = GLFW_KEY_SPACE
 };
 
-}
 
 #endif
 

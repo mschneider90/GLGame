@@ -11,7 +11,7 @@ add_definitions(-std=c++11)
 # GLGame executable and library linkage
 add_executable(GLGame main.cpp)
 include_directories(${PROJECT_SOURCE_DIR})
-target_link_libraries(GLGame game graphics input util)
+target_link_libraries(GLGame game input graphics util)
 
 
 

@@ -10,7 +10,7 @@ find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
 include_directories(../.)
-add_library(graphics graphics.cpp)
+add_library(graphics graphics.cpp window.cpp)
 
 target_link_libraries(graphics 
                       ${GLFW_STATIC_LIBRARIES}

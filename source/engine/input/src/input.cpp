@@ -1,11 +1,13 @@
 #include "engine/input/input.hpp"
-#include "engine/util/initializer.hpp"
+#include "engine/input/keys.hpp"
+#include "engine/graphics/window.hpp"
+#include "engine/util/glfw.hpp"
 
 #include <stdexcept>
 
-Input::Input(const Window* win) : currentWindow(w)
+Input::Input(Window* win) : currentWindow(win)
 {
-    glfwSetInputMode(currentWindow, GLFW_STICKY_KEYS, 1);
+    glfwSetInputMode(currentWindow->getGLFWwindow(), GLFW_STICKY_KEYS, 1);
 }
 
 Input::~Input()
@@ -13,28 +15,25 @@ Input::~Input()
 
 }
 
-Input::isKeyPressed(Key k)
+void Input::pollEvents()
+{
+    glfwPollEvents();
+}
+
+bool Input::isKeyPressed(Key k)
 {
     // Special case - ESC also checks if the window wants to be closed
     if (k == Key::ESC) {
-        if (glfwWindowShouldClose(currentWindow) {
+        if (glfwWindowShouldClose(currentWindow->getGLFWwindow())) {
             return true;
         }
     }
 
-    int keyState = glfwGetKey(window, static_cast<int>(k));
-    if (state == GLFW_PRESS) {
+    int keyState = glfwGetKey(currentWindow->getGLFWwindow(), static_cast<int>(k));
+    if (keyState == GLFW_PRESS) {
         return true;
     }
 
     return false;
 }
 
-const Window* Input::getCurrentWindow() {
-    return currentWindow;
-}
-
-void Input::setCurrentWindow(const Window* win) {
-    currentWindow = win;
-    glfwSetInputMode(currentWindow->GetGLFWWindow(), GLFW_STICKY_KEYS, 1);
-}

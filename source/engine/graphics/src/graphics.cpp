@@ -1,38 +1,41 @@
 #include "engine/graphics/graphics.hpp"
 #include "engine/util/resolution.hpp"
-#include "engine/util/initializer.hpp"
-
-// OpenGL headers live here
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "engine/util/glfw.hpp"
 
 #include <stdexcept>
 #include <string>
 
-Graphics::Graphics() : window(nullptr)
+Graphics::Graphics() : window(nullptr), isWindowOpen(false)
 {
     if (!glfwInit()) {
         throw std::runtime_error("graphics: glfw initialization failed");
     }
+
+    window = new Window();
 }
 
 Graphics::~Graphics()
 {
-    if (window) {
-        delete window;
-    }
+    delete window;
     glfwTerminate();
 }
 
 Window* Graphics::getWindowInstance(const std::string& title, const Resolution& res)
 {
-    if (window) {
+    if (isWindowOpen) {
         throw std::runtime_error("graphics: Window instance already created");
     }
 
-    window = new Window();
     window->open(title, res);
+    isWindowOpen = true;
     return window;
 }
 
+void Graphics::swapFrameBuffer()
+{
+    if (!isWindowOpen) {
+        throw std::runtime_error("graphics: Window must be open to swap framebuffer");
+    }
 
+    glfwSwapBuffers(window->getGLFWwindow());
+}

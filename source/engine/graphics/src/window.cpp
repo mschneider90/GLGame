@@ -1,4 +1,7 @@
 #include "engine/graphics/window.hpp"
+#include "engine/util/glfw.hpp"
+
+#include <stdexcept>
 
 Window::Window() : window(nullptr)
 {
@@ -38,4 +41,8 @@ void Window::close()
 
     // Window wasn't open in the first place
     throw std::runtime_error("graphics: Window destruction failed");
+}
+
+GLFWwindow* Window::getGLFWwindow() {
+    return window;
 }

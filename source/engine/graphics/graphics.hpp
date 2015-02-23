@@ -15,8 +15,10 @@ public:
     ~Graphics();
 
     Window* getWindowInstance(const std::string& title, const Resolution& res);
+    void swapFrameBuffer();
 private:
     Window* window;
+    bool isWindowOpen;
 };
 
 #endif
