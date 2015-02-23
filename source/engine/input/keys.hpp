@@ -1,10 +1,10 @@
 #ifndef KEYS_HPP
 #define KEYS_HPP
 
-namespace gle
+namespace engine
 {
 
-enum class Keys : std::int16_t
+enum class Key : std::int16_t
 {
     A = GLFW_KEY_A,
     B = GLFW_KEY_B,

@@ -2,8 +2,8 @@
 #define GRAPHICS_HPP
 
 #include "engine/util/resolution.hpp"
+#include "engine/graphics/window.hpp"
 
-#include <utility> // std::pair
 #include <string>
 
 class GLFWwindow;
@@ -14,10 +14,9 @@ public:
     Graphics();
     ~Graphics();
 
-    void openWindow(const std::string& title, const Resolution& res);
-    void closeWindow();
+    Window* getWindowInstance(const std::string& title, const Resolution& res);
 private:
-    GLFWwindow* window;
+    Window* window;
 };
 
 #endif

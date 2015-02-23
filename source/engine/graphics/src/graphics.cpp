@@ -7,44 +7,28 @@
 #include <GLFW/glfw3.h>
 
 #include <stdexcept>
-#include <utility> // std::pair
 #include <string>
 
 Graphics::Graphics() : window(nullptr)
 {
-    if (!Initializer::isInit()) {
-        throw std::runtime_error("graphics: Engine not initialized");
+    if (!glfwInit()) {
+        throw std::runtime_error("graphics: glfw initialization failed");
     }
 }
 
 Graphics::~Graphics()
 {
-}
-
-void Graphics::openWindow(const std::string& title, const Resolution& res)
-{
-    if (!window) {
-        const GLFWmonitor* monitor = nullptr;
-        const GLFWwindow* share = nullptr;
-        window = glfwCreateWindow(res.x, res.y, title.c_str(), nullptr, nullptr);
-        if (window) {
-            glfwMakeContextCurrent(window);
-            return;
-        }
+    if (window) {
+        window->close();
     }
-
-    // Either window was already open or failed to create one
-    throw std::runtime_error("graphics: Window initialized failed");
+    glfwTerminate();
 }
 
-void Graphics::closeWindow()
+Window* Graphics::getWindowInstance(const std::string& title, const Resolution& res)
 {
     if (window) {
-        glfwDestroyWindow(window);
-        window = nullptr;
-        return;
+        throw std::runtime_error("graphics: Window instance already created");
     }
-
-    // Window wasn't open in the first place
-    throw std::runtime_error("graphics: Window destruction failed");
 }
+
+
