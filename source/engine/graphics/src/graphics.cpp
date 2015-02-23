@@ -19,7 +19,7 @@ Graphics::Graphics() : window(nullptr)
 Graphics::~Graphics()
 {
     if (window) {
-        window->close();
+        delete window;
     }
     glfwTerminate();
 }
@@ -29,6 +29,10 @@ Window* Graphics::getWindowInstance(const std::string& title, const Resolution& 
     if (window) {
         throw std::runtime_error("graphics: Window instance already created");
     }
+
+    window = new Window();
+    window->open(title, res);
+    return window;
 }
 
 
