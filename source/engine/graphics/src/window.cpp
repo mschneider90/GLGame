@@ -1,9 +1,10 @@
 #include "engine/graphics/window.hpp"
+#include "engine/input/input.hpp"
 #include "engine/util/glfw.hpp"
 
 #include <stdexcept>
 
-Window::Window() : window(nullptr)
+Window::Window() : window(nullptr), input(nullptr)
 {
 
 }
@@ -12,6 +13,10 @@ Window::~Window()
 {
     if (window) {
         close();
+    }
+
+    if (input) {
+        delete input;
     }
 }
 
@@ -43,6 +48,16 @@ void Window::close()
     throw std::runtime_error("graphics: Window destruction failed");
 }
 
+Input* Window::getInputInstance() 
+{
+    if (!input) {
+        input = new Input(window);
+    }
+    
+    return input;
+}
+
 GLFWwindow* Window::getGLFWwindow() {
     return window;
 }
+

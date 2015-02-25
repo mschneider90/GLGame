@@ -5,9 +5,9 @@
 
 #include <stdexcept>
 
-Input::Input(Window* win) : currentWindow(win)
+Input::Input(GLFWwindow* win) : window(win)
 {
-    glfwSetInputMode(currentWindow->getGLFWwindow(), GLFW_STICKY_KEYS, 1);
+    glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
 }
 
 Input::~Input()
@@ -24,12 +24,12 @@ bool Input::isKeyPressed(Key k)
 {
     // Special case - ESC also checks if the window wants to be closed
     if (k == Key::ESC) {
-        if (glfwWindowShouldClose(currentWindow->getGLFWwindow())) {
+        if (glfwWindowShouldClose(window)) {
             return true;
         }
     }
 
-    int keyState = glfwGetKey(currentWindow->getGLFWwindow(), static_cast<int>(k));
+    int keyState = glfwGetKey(window, static_cast<int>(k));
     if (keyState == GLFW_PRESS) {
         return true;
     }
