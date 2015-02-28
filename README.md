@@ -27,6 +27,6 @@ Now build/GLGame should be generated.
   * `doxygen GLEngine.doxy`
   * `doxygen GLGame.doxy`
 
-Now docs/GLEngine/html and docs/GLGame/html should be generated. Open index.html in your web browser to view the documentation.
+Now contents of docs/GLEngine/ and docs/GLGame/ should be generated. Open index.html in your web browser to view the documentation.
 
 
