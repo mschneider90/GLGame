@@ -1,4 +1,5 @@
 #include "engine/graphics/graphics.hpp"
+#include "engine/graphics/window.hpp"
 #include "engine/util/resolution.hpp"
 
 #include <GL/glew.h>
@@ -7,7 +8,7 @@
 #include <string>
 
 GLEngine::Graphics::Graphics(const std::string& title,
-                   const Resolution& res) : window(nullptr)
+                             const Resolution& res) : window(nullptr)
 {
     if (!glfwInit()) {
         throw std::runtime_error("graphics: glfw initialization failed");

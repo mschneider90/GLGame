@@ -7,6 +7,8 @@
 namespace GLEngine
 {
 
+/*! @brief Represents the keys on a keyboard
+ */
 enum class Key : int
 {
     A = GLFW_KEY_A,
