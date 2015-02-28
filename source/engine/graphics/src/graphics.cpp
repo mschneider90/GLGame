@@ -11,6 +11,12 @@ Graphics::Graphics() : window(nullptr), isWindowOpen(false)
         throw std::runtime_error("graphics: glfw initialization failed");
     }
 
+    // GLEW handles openGL extensions
+    glewExperimental = GL_TRUE;
+    if (!glewInit()) {
+        throw std::runtime_error("graphics: glew initialization failed");
+    }
+
     window = new Window();
 }
 
@@ -39,3 +45,14 @@ void Graphics::swapFrameBuffer()
 
     glfwSwapBuffers(window->getGLFWwindow());
 }
+
+std::string Graphics::getRendererName()
+{
+    return reinterpret_cast<const char*>(glGetString(GL_RENDERER));
+}
+
+std::string Graphics::getOpenGLVersion()
+{
+    return reinterpret_cast<const char*>(glGetString(GL_VERSION));
+}
+

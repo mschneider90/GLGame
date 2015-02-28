@@ -16,6 +16,9 @@ public:
 
     Window* getWindowInstance(const std::string& title, const Resolution& res);
     void swapFrameBuffer();
+
+    std::string getRendererName();
+    std::string getOpenGLVersion();
 private:
     Window* window;
     bool isWindowOpen;
