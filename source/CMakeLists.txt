@@ -9,9 +9,10 @@ subdirs(engine game)
 add_definitions(-std=c++11)
 
 # GLGame executable and library linkage
-add_executable(GLGame main.cpp)
+add_executable(GLGame ./game/src/main.cpp)
 include_directories(${PROJECT_SOURCE_DIR})
 target_link_libraries(GLGame game input graphics util)
+
 
 
 
