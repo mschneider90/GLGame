@@ -15,10 +15,10 @@
   * `cd build`
 1. Initial configuration (only need to do this once)
   * `cmake ../source`
-2. Compiling
-  * `make install`
+2. Compilation
+  * `make`
 
-Now bin/GLGame should be generated.
+Now build/GLGame should be generated.
 
 ##Documentation
 0. Go to the docs folder
