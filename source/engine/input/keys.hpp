@@ -4,6 +4,9 @@
 #include <GLFW/glfw3.h>
 #include <cstdint>
 
+namespace GLEngine
+{
+
 enum class Key : int
 {
     A = GLFW_KEY_A,
@@ -46,6 +49,7 @@ enum class Key : int
     SPACE = GLFW_KEY_SPACE
 };
 
+}
 
 #endif
 

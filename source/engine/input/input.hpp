@@ -1,9 +1,13 @@
 #ifndef INPUT_HPP
 #define INPUT_HPP
 
+class GLFWwindow;
+
+namespace GLEngine
+{
+
 enum class Key : int;
 class Window;
-class GLFWwindow;
 
 class Input
 {
@@ -19,5 +23,7 @@ private:
 
     GLFWwindow* window;
 };
+
+}
 
 #endif

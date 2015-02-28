@@ -6,6 +6,10 @@
 #include <string>
 
 class GLFWwindow;
+
+namespace GLEngine 
+{
+
 class Input;
 
 class Window
@@ -24,5 +28,7 @@ private:
 
     Input* input;
 };
+
+}
 
 #endif

@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <string>
 
-Graphics::Graphics(const std::string& title,
+GLEngine::Graphics::Graphics(const std::string& title,
                    const Resolution& res) : window(nullptr)
 {
     if (!glfwInit()) {
@@ -27,28 +27,28 @@ Graphics::Graphics(const std::string& title,
     glDepthFunc(GL_LESS);
 }
 
-Graphics::~Graphics()
+GLEngine::Graphics::~Graphics()
 {
     delete window;
     glfwTerminate();
 }
 
-Window* Graphics::getWindowInstance()
+GLEngine::Window* GLEngine::Graphics::getWindowInstance()
 {
     return window;
 }
 
-void Graphics::swapFrameBuffer()
+void GLEngine::Graphics::swapFrameBuffer()
 {
     glfwSwapBuffers(window->getGLFWwindow());
 }
 
-std::string Graphics::getRendererName()
+std::string GLEngine::Graphics::getRendererName()
 {
     return reinterpret_cast<const char*>(glGetString(GL_RENDERER));
 }
 
-std::string Graphics::getOpenGLVersion()
+std::string GLEngine::Graphics::getOpenGLVersion()
 {
     return reinterpret_cast<const char*>(glGetString(GL_VERSION));
 }

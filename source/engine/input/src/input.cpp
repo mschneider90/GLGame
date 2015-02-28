@@ -5,25 +5,25 @@
 #include <GLFW/glfw3.h>
 #include <stdexcept>
 
-Input::Input(GLFWwindow* win) : window(win)
+GLEngine::Input::Input(GLFWwindow* win) : window(win)
 {
     glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
 }
 
-Input::~Input()
+GLEngine::Input::~Input()
 {
 
 }
 
-void Input::pollEvents()
+void GLEngine::Input::pollEvents()
 {
     glfwPollEvents();
 }
 
-bool Input::isKeyPressed(Key k)
+bool GLEngine::Input::isKeyPressed(Key k)
 {
     // Special case - ESC also checks if the window wants to be closed
-    if (k == Key::ESC) {
+    if (k == GLEngine::Key::ESC) {
         if (glfwWindowShouldClose(window)) {
             return true;
         }

@@ -8,6 +8,9 @@
 
 class GLFWwindow;
 
+namespace GLEngine
+{
+
 class Graphics
 {
 public:
@@ -20,7 +23,9 @@ public:
     std::string getRendererName();
     std::string getOpenGLVersion();
 private:
-    Window* window;
+    GLEngine::Window* window;
 };
+
+}
 
 #endif

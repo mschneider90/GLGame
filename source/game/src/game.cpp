@@ -8,9 +8,9 @@
 void Game::play()
 {
     // TODO init sound object and other game objects
-    Graphics graphics("GLGame", Resolution { 640, 480 });
-    Window* window = graphics.getWindowInstance();
-    Input* input = window->getInputInstance();
+    GLEngine::Graphics graphics("GLGame", GLEngine::Resolution { 640, 480 });
+    GLEngine::Window* window = graphics.getWindowInstance();
+    GLEngine::Input* input = window->getInputInstance();
 
     std::cout << "GPU    : " << graphics.getRendererName() << std::endl;
     std::cout << "OpenGL : " << graphics.getOpenGLVersion() << std::endl;
@@ -19,7 +19,7 @@ void Game::play()
     while (!exit) {
         // main game loop goes here
         input->pollEvents();
-        if (input->isKeyPressed(Key::ESC)) {
+        if (input->isKeyPressed(GLEngine::Key::ESC)) {
             exit = true;
         }
 

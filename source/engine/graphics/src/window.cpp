@@ -4,7 +4,8 @@
 #include <GLFW/glfw3.h>
 #include <stdexcept>
 
-Window::Window(const std::string& title, const Resolution& res) : window(nullptr), input(nullptr)
+GLEngine::Window::Window(const std::string& title,
+                         const GLEngine::Resolution& res) : window(nullptr), input(nullptr)
 {
     const GLFWmonitor* monitor = nullptr;
     const GLFWwindow* share = nullptr;
@@ -18,7 +19,7 @@ Window::Window(const std::string& title, const Resolution& res) : window(nullptr
     throw std::runtime_error("graphics: Window initialized failed");
 }
 
-Window::~Window()
+GLEngine::Window::~Window()
 {
     glfwDestroyWindow(window);
     window = nullptr;
@@ -28,16 +29,16 @@ Window::~Window()
     }
 }
 
-Input* Window::getInputInstance() 
+GLEngine::Input* GLEngine::Window::getInputInstance() 
 {
     if (!input) {
-        input = new Input(window);
+        input = new GLEngine::Input(window);
     }
     
     return input;
 }
 
-GLFWwindow* Window::getGLFWwindow() {
+GLFWwindow* GLEngine::Window::getGLFWwindow() {
     return window;
 }
 
