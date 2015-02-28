@@ -2,11 +2,12 @@
 
 ##Dependencies:
 * cmake 3.1
-* OpenGL
+* OpenGL (ships with graphics drivers)
 * GLFW
 * GLEW
 * OpenAL (later)
 * libpng (later)
+* libvorbis (later)
 * ...probably more
 
 ##Installation/Compilation:
@@ -15,16 +16,17 @@
 1. Initial configuration (only need to do this once)
   * `cmake ../source`
 2. Compiling
-  * `make`
+  * `make install`
 
-Now build/GLGame should be generated.
+Now bin/GLGame should be generated.
 
 ##Documentation
 0. Go to the docs folder
   * `cd docs`
 1. Run doxygen
-  * `doxygen Doxyfile`
+  * `doxygen GLEngine.doxy`
+  * `doxygen GLGame.doxy`
 
-Now docs/html/ should be generated. Open index.html in your web browser to view the documentation.
+Now docs/GLEngine/html and docs/GLGame/html should be generated. Open index.html in your web browser to view the documentation.
 
 
