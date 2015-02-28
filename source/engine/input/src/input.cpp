@@ -1,8 +1,8 @@
 #include "engine/input/input.hpp"
 #include "engine/input/keys.hpp"
 #include "engine/graphics/window.hpp"
-#include "engine/util/glfw.hpp"
 
+#include <GLFW/glfw3.h>
 #include <stdexcept>
 
 Input::Input(GLFWwindow* win) : window(win)

@@ -1,7 +1,8 @@
 #include "engine/graphics/graphics.hpp"
 #include "engine/util/resolution.hpp"
-#include "engine/util/glfw.hpp"
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include <stdexcept>
 #include <string>
 

@@ -1,3 +1,6 @@
+#ifndef WINDOW_HPP
+#define WINDOW_HPP
+
 #include "engine/util/resolution.hpp"
 
 #include <string>
@@ -21,3 +24,5 @@ private:
 
     Input* input;
 };
+
+#endif

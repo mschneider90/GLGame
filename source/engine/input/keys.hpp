@@ -1,8 +1,7 @@
 #ifndef KEYS_HPP
 #define KEYS_HPP
 
-#include "engine/util/glfw.hpp"
-
+#include <GLFW/glfw3.h>
 #include <cstdint>
 
 enum class Key : int

@@ -1,6 +1,5 @@
 #include "game/game.hpp"
 
-#include "engine/util/glfw.hpp"
 #include "engine/input/keys.hpp"
 #include "engine/util/resolution.hpp"
 

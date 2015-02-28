@@ -1,7 +1,7 @@
 #include "engine/graphics/window.hpp"
 #include "engine/input/input.hpp"
-#include "engine/util/glfw.hpp"
 
+#include <GLFW/glfw3.h>
 #include <stdexcept>
 
 Window::Window(const std::string& title, const Resolution& res) : window(nullptr), input(nullptr)
