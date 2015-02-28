@@ -9,8 +9,8 @@
 void Game::play()
 {
     // TODO init sound object and other game objects
-    Graphics graphics;
-    Window* window = graphics.getWindowInstance("GLGame", Resolution { 640, 480 } );
+    Graphics graphics("GLGame", Resolution { 640, 480 });
+    Window* window = graphics.getWindowInstance();
     Input* input = window->getInputInstance();
 
     std::cout << "GPU    : " << graphics.getRendererName() << std::endl;

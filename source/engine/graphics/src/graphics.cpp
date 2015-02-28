@@ -5,7 +5,8 @@
 #include <stdexcept>
 #include <string>
 
-Graphics::Graphics() : window(nullptr), isWindowOpen(false)
+Graphics::Graphics(const std::string& title,
+                   const Resolution& res) : window(nullptr)
 {
     if (!glfwInit()) {
         throw std::runtime_error("graphics: glfw initialization failed");
@@ -17,7 +18,7 @@ Graphics::Graphics() : window(nullptr), isWindowOpen(false)
         throw std::runtime_error("graphics: glew initialization failed");
     }
 
-    window = new Window();
+    window = new Window(title, res);
 }
 
 Graphics::~Graphics()
@@ -26,23 +27,13 @@ Graphics::~Graphics()
     glfwTerminate();
 }
 
-Window* Graphics::getWindowInstance(const std::string& title, const Resolution& res)
+Window* Graphics::getWindowInstance()
 {
-    if (isWindowOpen) {
-        throw std::runtime_error("graphics: Window instance already created");
-    }
-
-    window->open(title, res);
-    isWindowOpen = true;
     return window;
 }
 
 void Graphics::swapFrameBuffer()
 {
-    if (!isWindowOpen) {
-        throw std::runtime_error("graphics: Window must be open to swap framebuffer");
-    }
-
     glfwSwapBuffers(window->getGLFWwindow());
 }
 

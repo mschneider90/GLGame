@@ -11,17 +11,16 @@ class GLFWwindow;
 class Graphics
 {
 public:
-    Graphics();
+    Graphics(const std::string& title, const Resolution& res);
     ~Graphics();
 
-    Window* getWindowInstance(const std::string& title, const Resolution& res);
+    Window* getWindowInstance();
     void swapFrameBuffer();
 
     std::string getRendererName();
     std::string getOpenGLVersion();
 private:
     Window* window;
-    bool isWindowOpen;
 };
 
 #endif
