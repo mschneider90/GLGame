@@ -13,12 +13,18 @@ Graphics::Graphics(const std::string& title,
     }
 
     // GLEW handles openGL extensions
+    // This needs to happen before Window creation or glewInit fails
     glewExperimental = GL_TRUE;
     if (!glewInit()) {
         throw std::runtime_error("graphics: glew initialization failed");
     }
 
+    // OpenGL context is alive after this call
     window = new Window(title, res);
+
+    // Depth testing only draws a pixel if it's visible
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 }
 
 Graphics::~Graphics()
