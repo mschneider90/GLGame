@@ -2,9 +2,8 @@
 #include "engine/graphics/window.hpp"
 #include "engine/util/resolution.hpp"
 #include "engine/util/logger.hpp"
+#include "engine/util/gl.hpp"
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <stdexcept>
 #include <string>
 

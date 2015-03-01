@@ -1,5 +1,4 @@
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "engine/util/gl.hpp"
 #include <string>
 
 namespace GLEngine
@@ -21,6 +20,8 @@ protected:
     
     virtual GLuint createShader() = 0;
 private:
+    void compileShader();
+    
     GLuint shaderIndex;
     bool shaderCompiled;
     std::string shaderText;

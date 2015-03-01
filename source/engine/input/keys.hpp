@@ -1,7 +1,7 @@
 #ifndef KEYS_HPP
 #define KEYS_HPP
 
-#include <GLFW/glfw3.h>
+#include "engine/util/gl.hpp"
 #include <cstdint>
 
 namespace GLEngine

@@ -1,7 +1,7 @@
 #include "engine/graphics/window.hpp"
 #include "engine/input/input.hpp"
 
-#include <GLFW/glfw3.h>
+#include "engine/util/gl.hpp"
 #include <stdexcept>
 
 GLEngine::Window::Window(const std::string& title,

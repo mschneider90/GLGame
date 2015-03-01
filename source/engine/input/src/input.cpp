@@ -2,7 +2,7 @@
 #include "engine/input/keys.hpp"
 #include "engine/graphics/window.hpp"
 
-#include <GLFW/glfw3.h>
+#include "engine/util/gl.hpp"
 #include <stdexcept>
 
 GLEngine::Input::Input(GLFWwindow* win) : window(win)

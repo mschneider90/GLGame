@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     catch (const std::runtime_error& e) {
         GLEngine::Logger::logMessage("ERROR: Exiting with exception...");
         GLEngine::Logger::logMessage(e.what());
-        std::cerr << "ERROR: Please see" << LOGFILE << std::endl;
+        std::cerr << "ERROR: Please see " << LOGFILE << std::endl;
         return EXIT_FAIL;
     }
 

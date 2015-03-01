@@ -32,8 +32,6 @@ void Game::play()
             exit = true;
         }
 
-        // TEMPORARY so I can figure this out
-
         graphics.swapFrameBuffer();
     }
     
