@@ -40,6 +40,10 @@ public:
     /*! @brief Swap the framebuffers
      */
     void swapFrameBuffer();
+    
+    /*! @brief Clear the current framebuffer
+     */
+    void clearFrameBuffer();
 
     /*! @brief Get the name of the renderer (GPU)
      *

@@ -44,6 +44,11 @@ void GLEngine::Graphics::swapFrameBuffer()
     glfwSwapBuffers(window->getGLFWwindow());
 }
 
+void GLEngine::Graphics::clearFrameBuffer()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
 std::string GLEngine::Graphics::getRendererName()
 {
     return reinterpret_cast<const char*>(glGetString(GL_RENDERER));
