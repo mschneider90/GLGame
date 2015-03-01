@@ -10,15 +10,13 @@
 
 void Game::play()
 {
-    Logger log("GLGame.log");
-    
     // TODO init sound object and other game objects
     GLEngine::Graphics graphics("GLGame", GLEngine::Resolution { 640, 480 });
     GLEngine::Window* window = graphics.getWindowInstance();
     GLEngine::Input* input = window->getInputInstance();
 
-    Logger::logMessage(std::string("GPU    : " << graphics.getRendererName()));
-    Logger::logMessage(std::string("OpenGL : " << graphics.getOpenGLVersion()));
+    GLEngine::Logger::logMessage(std::string("GPU    : ").append(graphics.getRendererName()));
+    GLEngine::Logger::logMessage(std::string("OpenGL : ").append(graphics.getOpenGLVersion()));
 
     bool exit = false;
     while (!exit) {

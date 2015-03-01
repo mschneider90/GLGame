@@ -1,17 +1,17 @@
 #include "engine/util/logger.hpp"
 
-#include <ofstream>
+#include <fstream>
 #include <stdexcept>
 #include <mutex>
 
-static std::vector<std::string> GLEngine::Logger::log;
-static bool isOpen = false;
+std::vector<std::string> GLEngine::Logger::log;
+bool GLEngine::Logger::isOpen = false;
 
 GLEngine::Logger::Logger(const std::string& fileName)
 {
     openMutex.lock();
     if (isOpen) {
-        throw std::runtime_exception("Only one logger instance allowed");
+        throw std::runtime_error("Only one logger instance allowed");
     }
     isOpen = true;
     openMutex.unlock();
@@ -28,7 +28,7 @@ GLEngine::Logger::~Logger()
     logFile.close();
 }
 
-static GLEngine::Logger::logMessage(const std::string& msg)
+void GLEngine::Logger::logMessage(std::string msg)
 {
     static std::mutex logMutex;
     

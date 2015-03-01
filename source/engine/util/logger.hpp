@@ -1,7 +1,8 @@
 #ifndef GLENGINE_LOGGER_H
 #define GLENGINE_LOGGER_H
 
-#include <ofstream>
+#include <fstream>
+#include <vector>
 #include <mutex>
 
 namespace GLEngine
