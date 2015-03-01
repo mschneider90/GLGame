@@ -1,6 +1,7 @@
 #include "engine/graphics/graphics.hpp"
 #include "engine/graphics/window.hpp"
 #include "engine/util/resolution.hpp"
+#include "engine/util/logger.hpp"
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -10,6 +11,7 @@
 GLEngine::Graphics::Graphics(const std::string& title,
                              const Resolution& res) : window(nullptr)
 {
+    glfwSetErrorCallback(glfwErrorCallback);
     if (!glfwInit()) {
         throw std::runtime_error("graphics: glfw initialization failed");
     }
@@ -57,5 +59,10 @@ std::string GLEngine::Graphics::getRendererName()
 std::string GLEngine::Graphics::getOpenGLVersion()
 {
     return reinterpret_cast<const char*>(glGetString(GL_VERSION));
+}
+
+void glfwErrorCallback(int error, const char* msg) 
+{
+    GLEngine::Logger::logMessage(msg);
 }
 

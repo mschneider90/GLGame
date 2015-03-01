@@ -4,6 +4,8 @@
 namespace GLEngine
 {
 
+/*! @brief Represents the resolution of a screen or texture
+ */
 typedef struct 
 {
     int x;

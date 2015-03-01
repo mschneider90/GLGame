@@ -44,6 +44,10 @@ public:
     /*! @brief Clear the current framebuffer
      */
     void clearFrameBuffer();
+    
+    /*! @brief Draw to the framebuffer
+     */
+    //void draw(Drawable drawObj);
 
     /*! @brief Get the name of the renderer (GPU)
      *
@@ -62,5 +66,9 @@ private:
 };
 
 }
+
+/*! @brief Callback for any GLFW errors
+ */
+void glfwErrorCallback(int error, const char* msg);
 
 #endif
