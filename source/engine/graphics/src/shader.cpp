@@ -27,6 +27,8 @@ unsigned int GLEngine::Shader::getShaderIndex()
 {
     if (!shaderCompiled)
     {
+        shaderCompiled = true;
+        
         // This can't be inside the constructor since createShader is virtual
         shaderIndex = createShader();
         
