@@ -22,6 +22,7 @@ protected:
     virtual GLuint createShader() = 0;
 private:
     GLuint shaderIndex;
+    bool shaderCompiled;
     std::string shaderText;
 };
 
