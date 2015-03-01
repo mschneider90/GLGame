@@ -32,7 +32,9 @@ void GLEngine::Logger::logMessage(std::string msg)
 {
     static std::mutex logMutex;
     
-    logMutex.lock();
-    log.push_back(msg);
-    logMutex.unlock();
+    if (isOpen) {
+        logMutex.lock();
+        log.push_back(msg);
+        logMutex.unlock();
+    }
 }
