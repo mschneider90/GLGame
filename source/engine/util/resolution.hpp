@@ -1,5 +1,5 @@
-#ifndef RESOLUTION_HPP
-#define RESOLUTION_HPP
+#ifndef GLENGINE_RESOLUTION_HPP
+#define GLENGINE_RESOLUTION_HPP
 
 namespace GLEngine
 {

@@ -1,3 +1,6 @@
+#ifndef GLENGINE_VERTSHADER_HPP
+#define GLENGINE_VERTSHADER_HPP
+
 #include "engine/graphics/shader.hpp"
 
 namespace GLEngine
@@ -19,3 +22,5 @@ private:
 };
 
 }
+
+#endif

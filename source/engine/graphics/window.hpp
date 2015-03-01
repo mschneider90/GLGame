@@ -1,5 +1,5 @@
-#ifndef WINDOW_HPP
-#define WINDOW_HPP
+#ifndef GLENGINE_WINDOW_HPP
+#define GLENGINE_WINDOW_HPP
 
 #include "engine/util/resolution.hpp"
 

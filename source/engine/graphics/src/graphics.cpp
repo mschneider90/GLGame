@@ -14,6 +14,12 @@ GLEngine::Graphics::Graphics(const std::string& title,
     if (!glfwInit()) {
         throw std::runtime_error("graphics: glfw initialization failed");
     }
+    
+    // Use OpenGL 3.2 for now
+    glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 2);
+    glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // OpenGL context is alive after this call
     window = new Window(title, res);

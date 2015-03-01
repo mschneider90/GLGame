@@ -1,3 +1,6 @@
+#ifndef GLENGINE_FRAGSHADER_HPP
+#define GLENGINE_FRAGSHADER_HPP
+
 #include "engine/graphics/shader.hpp"
 
 namespace GLEngine
@@ -19,3 +22,5 @@ private:
 };
 
 }
+
+#endif

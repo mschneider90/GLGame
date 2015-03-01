@@ -1,5 +1,5 @@
-#ifndef INPUT_HPP
-#define INPUT_HPP
+#ifndef GLENGINE_INPUT_HPP
+#define GLENGINE_INPUT_HPP
 
 class GLFWwindow;
 

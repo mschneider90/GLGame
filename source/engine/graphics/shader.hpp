@@ -1,3 +1,6 @@
+#ifndef GLENGINE_SHADER_HPP
+#define GLENGINE_SHADER_HPP
+
 #include "engine/util/gl.hpp"
 #include <string>
 
@@ -28,3 +31,5 @@ private:
 };
 
 }
+
+#endif

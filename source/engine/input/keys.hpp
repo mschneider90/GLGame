@@ -1,5 +1,5 @@
-#ifndef KEYS_HPP
-#define KEYS_HPP
+#ifndef GLENGINE_KEYS_HPP
+#define GLENGINE_KEYS_HPP
 
 #include "engine/util/gl.hpp"
 #include <cstdint>

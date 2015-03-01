@@ -1,5 +1,5 @@
-#ifndef GRAPHICS_HPP
-#define GRAPHICS_HPP
+#ifndef GLENGINE_GRAPHICS_HPP
+#define GLENGINE_GRAPHICS_HPP
 
 #include "engine/util/resolution.hpp"
 
