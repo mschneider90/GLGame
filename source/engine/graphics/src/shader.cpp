@@ -32,8 +32,10 @@ GLEngine::Shader::~Shader()
 
 unsigned int GLEngine::Shader::getShaderIndex() 
 {
-    // Defer shader compilation to here since it's a virtual function
+    // Defer shader creation/compilation to here since this a virtual function
     // and can't be in the constructor
+    shaderIndex = createShader();
+    
     if (!shaderCompiled) {
         compileShader();
     }
@@ -43,8 +45,6 @@ unsigned int GLEngine::Shader::getShaderIndex()
 
 void GLEngine::Shader::compileShader()
 {
-    shaderIndex = createShader();
-    
     const int SHADER_COUNT = 1;
     const GLint* SHADER_LENGTH = nullptr;
     const char* shaderTextCstr = shaderText.c_str();
