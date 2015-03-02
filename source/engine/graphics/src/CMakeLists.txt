@@ -10,6 +10,10 @@ include_directories(${GLEW_INCLUDE_DIRS})
 # GL
 find_package(OpenGL REQUIRED)
 
+# libPNG
+find_package(PNG REQUIRED)
+include_directories(${PNG_INCLUDE_DIRS})
+
 # Xxf86vm (linked against by GLFW)
 find_library(LIB_XXF Xxf86vm)
 if (NOT LIB_XXF)
@@ -64,6 +68,7 @@ target_link_libraries(graphics
                       ${GLFW_LIBRARIES}
                       ${GLEW_LIBRARIES}
                       ${OPENGL_LIBRARIES}
+                      ${PNG_LIBRARIES}
                       ${LIB_XXF}
                       ${CMAKE_THREAD_LIBS_INIT}
                       ${LIB_XRR}

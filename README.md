@@ -5,8 +5,8 @@
 * OpenGL (ships with graphics drivers)
 * GLFW
 * GLEW
+* libpng
 * OpenAL (later)
-* libpng (later)
 * libvorbis (later)
 * ...probably more
 
