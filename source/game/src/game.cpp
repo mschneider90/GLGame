@@ -13,36 +13,37 @@
 
 #include <iostream>
 
+using namespace GLEngine;
+
 void Game::play()
 {
-    GLEngine::Logger::logMessage("Beginning OpenGL initialization...");
+    Logger::logMessage("Beginning OpenGL initialization...");
     
     // TODO init sound object and other game objects
-    GLEngine::Graphics graphics("GLGame", GLEngine::Resolution { 640, 480 });
-    GLEngine::Window* window = graphics.getWindowInstance();
-    GLEngine::Input* input = window->getInputInstance();
+    Graphics graphics("GLGame", Resolution { 640, 480 });
+    Window* window = graphics.getWindowInstance();
+    Input* input = window->getInputInstance();
 
-    GLEngine::Logger::logMessage("OpenGL initialization complete");
-    GLEngine::Logger::logMessage(std::string("GPU    : ").append(graphics.getRendererName()));
-    GLEngine::Logger::logMessage(std::string("OpenGL : ").append(graphics.getOpenGLVersion()));
+    Logger::logMessage("OpenGL initialization complete");
+    Logger::logMessage(std::string("GPU    : ").append(graphics.getRendererName()));
+    Logger::logMessage(std::string("OpenGL : ").append(graphics.getOpenGLVersion()));
     
     // TEMP FOR TESTING
-    GLEngine::ShaderProgram prog("data/test_vs.glsl", "data/test_fs.glsl");
-    std::vector<GLEngine::Vec3> vertices = { GLEngine::Vec3{ 0.0f,  .5f, 0.0f},
-                                             GLEngine::Vec3{  .5f, -.5f, 0.0f},
-                                             GLEngine::Vec3{ -.5f, -.5f, 0.0f} };
-    GLEngine::Mesh mesh(vertices);
+    ShaderProgram prog("data/test_vs.glsl", "data/test_fs.glsl");
+    std::vector<Vec3> vertices = { Vec3{ 0.0f,  .5f, 0.0f},
+                                   Vec3{  .5f, -.5f, 0.0f},
+                                   Vec3{ -.5f, -.5f, 0.0f} };
+    Mesh mesh(vertices);
 
     // main game loop goes here
-    GLEngine::Logger::logMessage("Entering game loop...");
+    Logger::logMessage("Entering game loop...");
     bool exit = false;
     while (!exit) {
-        
         graphics.clearFrameBuffer();
         
         // check for input
         input->pollEvents();
-        if (input->isKeyPressed(GLEngine::Key::ESC)) {
+        if (input->isKeyPressed(Key::ESC)) {
             exit = true;
         }
         
@@ -54,6 +55,6 @@ void Game::play()
         graphics.swapFrameBuffer();
     }
     
-    GLEngine::Logger::logMessage("Exiting game loop...");
+    Logger::logMessage("Exiting game loop...");
 }
 
