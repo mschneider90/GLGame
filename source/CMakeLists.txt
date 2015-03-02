@@ -1,6 +1,6 @@
-cmake_minimum_required (VERSION 3.1)
+cmake_minimum_required(VERSION 3.1)
 
-project (GLGameProject)
+project(GLGameProject)
 
 # Source subdirs
 subdirs(engine game)
@@ -18,6 +18,9 @@ target_link_libraries(GLGame game input graphics util)
 
 # Copy the executable to the bin/ folder
 install( PROGRAMS ${CMAKE_BINARY_DIR}/GLGame DESTINATION ${CMAKE_BINARY_DIR}/../bin/ )
+
+# Copy data folder to the bin/ folder
+install( DIRECTORY ${PROJECT_SOURCE_DIR}/game/data DESTINATION ${CMAKE_BINARY_DIR}/../bin/ )
 
 
 

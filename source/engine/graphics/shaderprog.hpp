@@ -29,7 +29,7 @@ public:
     
     /*! @brief Get the index of the shader program
      */
-    unsigned int getProgramIndex();
+    unsigned int getProgramIndex() const;
 private:
     VertexShader* vs;
     FragmentShader* fs;

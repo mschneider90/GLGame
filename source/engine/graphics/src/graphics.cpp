@@ -49,6 +49,13 @@ GLEngine::Window* GLEngine::Graphics::getWindowInstance()
     return window;
 }
 
+void GLEngine::Graphics::draw(const GLEngine::Mesh& mesh, const GLEngine::ShaderProgram& prog)
+{
+    glUseProgram (prog.getProgramIndex());
+    glBindVertexArray(mesh.getAttributeIndex());
+    glDrawArrays (GL_TRIANGLES, 0, mesh.getNumVertices());
+}
+
 void GLEngine::Graphics::swapFrameBuffer()
 {
     glfwSwapBuffers(window->getGLFWwindow());

@@ -40,7 +40,7 @@ GLEngine::ShaderProgram::~ShaderProgram()
     delete fs;
 }
 
-unsigned int GLEngine::ShaderProgram::getProgramIndex()
+unsigned int GLEngine::ShaderProgram::getProgramIndex() const
 {
     return static_cast<unsigned int>(programIndex);
 }

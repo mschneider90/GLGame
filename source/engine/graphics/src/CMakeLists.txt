@@ -57,6 +57,7 @@ add_library(graphics
             fragshader.cpp
             vertshader.cpp
             shaderprog.cpp
+            mesh.cpp
            )
 
 target_link_libraries(graphics

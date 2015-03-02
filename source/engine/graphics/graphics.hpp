@@ -2,6 +2,8 @@
 #define GLENGINE_GRAPHICS_HPP
 
 #include "engine/util/resolution.hpp"
+#include "engine/graphics/mesh.hpp"
+#include "engine/graphics/shaderprog.hpp"
 
 #include <string>
 
@@ -45,9 +47,9 @@ public:
      */
     void clearFrameBuffer();
     
-    /*! @brief Draw to the framebuffer
+    /*! @brief Draw a mesh to the framebuffer with the specified shader program (TEMPORARY)
      */
-    //void draw(Drawable drawObj);
+    void draw(const Mesh& mesh, const ShaderProgram& prog);
 
     /*! @brief Get the name of the renderer (GPU)
      *

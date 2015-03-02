@@ -10,18 +10,22 @@
 * libvorbis (later)
 * ...probably more
 
-##Installation/Compilation:
-0. Go to the build folder
+##Compilation and Installation:
+0. Go to the build directory
   * `cd build`
 1. Initial configuration (only need to do this once)
   * `cmake ../source`
 2. Compilation
   * `make`
-
-Now build/GLGame should be generated.
+  * Now build/GLGame should be generated.
+3. Installation
+  * `make install`
+  * Now bin/GLGame should be generated, along with all data files necessary.
+  
+GLGame can then be run from the bin/ directory.
 
 ##Documentation
-0. Go to the docs folder
+0. Go to the docs directory
   * `cd docs`
 1. Run doxygen
   * `doxygen GLEngine.doxy`
