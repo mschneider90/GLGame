@@ -50,7 +50,14 @@ if (NOT LIB_XCR)
 endif()
 
 include_directories(../.)
-add_library(graphics graphics.cpp window.cpp shader.cpp fragshader.cpp vertshader.cpp)
+add_library(graphics
+            graphics.cpp
+            window.cpp
+            shader.cpp
+            fragshader.cpp
+            vertshader.cpp
+            shaderprog.cpp
+           )
 
 target_link_libraries(graphics
                       ${GLFW_LIBRARIES}

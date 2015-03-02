@@ -52,7 +52,7 @@ void GLEngine::Shader::compileShader()
     glCompileShader(shaderIndex);
     
     // Check shader compilation status
-    int retVal = GL_FALSE;
+    GLint retVal = GL_FALSE;
     glGetShaderiv(shaderIndex, GL_COMPILE_STATUS, &retVal);
     if (retVal != GL_TRUE) // compilation failed, log an error and throw
     {

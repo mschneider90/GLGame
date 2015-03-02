@@ -20,6 +20,9 @@ GLEngine::Graphics::Graphics(const std::string& title,
     glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    
+    // 4x antialiasing
+    glfwWindowHint (GLFW_SAMPLES, 4);
 
     // OpenGL context is alive after this call
     window = new Window(title, res);

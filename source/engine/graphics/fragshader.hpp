@@ -6,18 +6,22 @@
 namespace GLEngine
 {
 
-/*! @brief Allows for loading of a fragment shader from disk
+class ShaderProgram;
+
+/*! @brief Represents a fragment shader
  */
 class FragmentShader : public Shader
 {
+    friend class ShaderProgram;
 public:
+private:
     /*! @brief Load a fragment shader
      *
      *  @param fileName The name of the file to be loaded
      */
     FragmentShader(const std::string& fileName);
     ~FragmentShader();
-private:
+    
     GLuint createShader();
 };
 
