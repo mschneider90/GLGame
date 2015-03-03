@@ -12,15 +12,15 @@ class ShaderProgram;
  */
 class VertexShader : public Shader
 {
-    friend class ShaderProgram;
+    friend class ShaderManager;
 public:
+    ~VertexShader();
 private:
     /*! @brief Load a vertex shader
      *
      *  @param fileName The name of the file to be loaded
      */
     VertexShader(const std::string& fileName);
-    ~VertexShader();
     
     GLuint createShader();
 };

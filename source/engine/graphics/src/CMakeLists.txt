@@ -62,6 +62,7 @@ add_library(graphics
             vertshader.cpp
             shaderprog.cpp
             mesh.cpp
+            shaderman.cpp
            )
 
 target_link_libraries(graphics

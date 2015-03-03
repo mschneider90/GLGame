@@ -2,8 +2,11 @@
 #define GLENGINE_SHADERPROG_HPP
 
 #include "engine/util/gl.hpp"
+#include "engine/graphics/fragshader.hpp"
+#include "engine/graphics/vertshader.hpp"
 
 #include <string>
+#include <memory>
 
 namespace GLEngine
 {
@@ -18,10 +21,11 @@ class ShaderProgram
 public:
     /*! @brief Load a ShaderProgram from disk
      *
-     *  @param vertexShaderPath The path to the vertex shader file
-     *  @param fragmentShaderPath The path to the fragment shader file
+     *  @param TODO
+     *  @param TODO
      */
-    ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
+    ShaderProgram(VertexShader& vs,
+                  FragmentShader& fs);
     
     /*! @brief Destroy a ShaderProgram
      */
@@ -31,9 +35,6 @@ public:
      */
     unsigned int getProgramIndex() const;
 private:
-    VertexShader* vs;
-    FragmentShader* fs;
-    
     GLuint programIndex;
 };
 

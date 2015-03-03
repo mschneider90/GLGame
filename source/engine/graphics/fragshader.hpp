@@ -12,15 +12,15 @@ class ShaderProgram;
  */
 class FragmentShader : public Shader
 {
-    friend class ShaderProgram;
+    friend class ShaderManager;
 public:
+    ~FragmentShader();
 private:
     /*! @brief Load a fragment shader
      *
      *  @param fileName The name of the file to be loaded
      */
     FragmentShader(const std::string& fileName);
-    ~FragmentShader();
     
     GLuint createShader();
 };

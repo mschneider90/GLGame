@@ -8,6 +8,7 @@
 
 // TEMP FOR TESTING
 #include "engine/graphics/shaderprog.hpp"
+#include "engine/graphics/shaderman.hpp"
 #include "engine/graphics/mesh.hpp"
 #include "engine/util/vectors.hpp"
 
@@ -29,7 +30,9 @@ void Game::play()
     Logger::logMessage(std::string("OpenGL : ").append(graphics.getOpenGLVersion()));
     
     // TEMP FOR TESTING
-    ShaderProgram prog("data/test_vs.glsl", "data/test_fs.glsl");
+    ShaderManager shaderMan;
+    ShaderProgram* prog = shaderMan.makeShaderProgram("data/test_vs.glsl", "data/test_fs.glsl");
+    ShaderProgram* prog2 = shaderMan.makeShaderProgram("data/test_vs.glsl", "data/test_fs.glsl");
     std::vector<Vec3> vertices = { Vec3{ 0.0f,  .5f, 0.0f},
                                    Vec3{  .5f, -.5f, 0.0f},
                                    Vec3{ -.5f, -.5f, 0.0f} };
@@ -50,7 +53,7 @@ void Game::play()
         // update game state (TODO)
         
         // draw stuff
-        graphics.draw(mesh, prog);
+        graphics.draw(mesh, *prog);
         
         graphics.swapFrameBuffer();
     }

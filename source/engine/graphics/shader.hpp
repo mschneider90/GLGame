@@ -26,7 +26,7 @@ private:
     void compileShader();
     
     GLuint shaderIndex;
-    bool shaderCompiled;
+    bool shaderInit;
     std::string shaderText;
 };
 

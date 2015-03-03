@@ -24,12 +24,15 @@ public:
      *  @return A pointer to the Input instance. Guaranteed to not be null.
      */
     Input* getInputInstance();
+    
+    /*! @brief Destroy the Window
+     */
+    ~Window();
 private:
     // Window creation should happen only from Graphics
     friend class Graphics;
 
     Window(const std::string& title, const Resolution& res);
-    ~Window();
     
     GLFWwindow* getGLFWwindow();
     GLFWwindow* window;

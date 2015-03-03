@@ -4,14 +4,14 @@
 #include "engine/util/logger.hpp"
 
 #include <vector>
+#include <memory>
 
 GLEngine::Mesh::Mesh(const std::vector<GLEngine::Vec3>& vertices) : numVertices(0), attributeIndex(0)
 {
     numVertices = vertices.size();
     
-    float* points = new float[numVertices * 3];
+    std::vector<float> points(numVertices*3);
     int pointIndex = 0;
-    
     // Convert to a 1D array of floats for OpenGL
     for (GLEngine::Vec3 v : vertices)
     {
@@ -26,7 +26,7 @@ GLEngine::Mesh::Mesh(const std::vector<GLEngine::Vec3>& vertices) : numVertices(
     const int NUM_BUFFERS = 1;
     glGenBuffers(NUM_BUFFERS, &bufferIndex);
     glBindBuffer(GL_ARRAY_BUFFER, bufferIndex);
-    glBufferData(GL_ARRAY_BUFFER, numVertices * 3 * sizeof (float), points, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, points.size() * sizeof (float), points.data(), GL_STATIC_DRAW);
     
     // Generate vertex attribute object
     attributeIndex = 0;
@@ -35,9 +35,8 @@ GLEngine::Mesh::Mesh(const std::vector<GLEngine::Vec3>& vertices) : numVertices(
     glBindVertexArray(attributeIndex);
     glEnableVertexAttribArray (0);
     glBindBuffer (GL_ARRAY_BUFFER, bufferIndex);
+    // TODO
     glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-    
-    delete points;
 }
 
 GLEngine::Mesh::~Mesh()

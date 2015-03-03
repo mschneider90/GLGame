@@ -6,7 +6,7 @@
 #include <string>
 #include <stdexcept>
 
-GLEngine::Shader::Shader(const std::string& fileName) : shaderIndex(0), shaderCompiled(false)
+GLEngine::Shader::Shader(const std::string& fileName) : shaderIndex(0), shaderInit(false)
 {
     std::ifstream in;
     
@@ -27,17 +27,17 @@ GLEngine::Shader::Shader(const std::string& fileName) : shaderIndex(0), shaderCo
 
 GLEngine::Shader::~Shader()
 {
-    glDeleteShader(shaderIndex);
+
 }
 
 unsigned int GLEngine::Shader::getShaderIndex() 
-{
-    // Defer shader creation/compilation to here since this a virtual function
-    // and can't be in the constructor
-    shaderIndex = createShader();
-    
-    if (!shaderCompiled) {
+{   
+    if (!shaderInit) {
+        // Defer shader creation/compilation to here since this a virtual function
+        // and can't be in the constructor
+        shaderIndex = createShader();
         compileShader();
+        shaderInit = true;
     }
     
     return static_cast<unsigned int>(shaderIndex);
@@ -63,9 +63,7 @@ void GLEngine::Shader::compileShader()
         GLEngine::Logger::logMessage(std::string(log));
         throw std::runtime_error("graphics: shader compilation failed");
     }
-    
-    shaderCompiled = true;
-        
+     
     // Don't need shaderText anymore
     shaderText.clear();
 }
