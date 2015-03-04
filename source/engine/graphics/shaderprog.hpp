@@ -11,6 +11,7 @@
 namespace GLEngine
 {
 
+class ShaderManager;
 class VertexShader;
 class FragmentShader;
 
@@ -18,15 +19,8 @@ class FragmentShader;
  */
 class ShaderProgram
 {
+    friend class ShaderManager;
 public:
-    /*! @brief Load a ShaderProgram from disk
-     *
-     *  @param TODO
-     *  @param TODO
-     */
-    ShaderProgram(VertexShader& vs,
-                  FragmentShader& fs);
-    
     /*! @brief Destroy a ShaderProgram
      */
     ~ShaderProgram();
@@ -35,6 +29,14 @@ public:
      */
     unsigned int getProgramIndex() const;
 private:
+    /*! @brief Load a ShaderProgram from disk
+     *
+     *  @param The path to the vertex shader file on disk
+     *  @param The path to the fragment shader file on disk
+     */
+    ShaderProgram(VertexShader& vs,
+                  FragmentShader& fs);
+                  
     GLuint programIndex;
 };
 
