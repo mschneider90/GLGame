@@ -35,7 +35,6 @@ ShaderManager::makeShaderProgram(const std::string& vsPath,
         auto vsIter = vertexShaderCache.find(vsPath);
         if (vsIter == vertexShaderCache.end()) { // not already loaded, create a new one
             Logger::logMessage(std::string("Shader cache miss, loading ").append(vsPath));
-            std::unique_ptr<VertexShader> vs;
             vertexShaderCache.emplace(vsPath, std::unique_ptr<VertexShader>(new VertexShader(vsPath)));
         }
         else {
@@ -50,7 +49,6 @@ ShaderManager::makeShaderProgram(const std::string& vsPath,
         auto fsIter = fragmentShaderCache.find(fsPath);
         if (fsIter == fragmentShaderCache.end()) {
             Logger::logMessage(std::string("Shader cache miss, loading ").append(fsPath));
-            std::unique_ptr<FragmentShader> fs;
             fragmentShaderCache.emplace(fsPath, std::unique_ptr<FragmentShader>(new FragmentShader(fsPath)));
         }
         else {
