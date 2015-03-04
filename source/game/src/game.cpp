@@ -29,10 +29,9 @@ void Game::play()
     Logger::logMessage(std::string("GPU    : ").append(graphics.getRendererName()));
     Logger::logMessage(std::string("OpenGL : ").append(graphics.getOpenGLVersion()));
     
-    // TEMP FOR TESTING
-    ShaderManager shaderMan;
-    ShaderProgram* prog = shaderMan.makeShaderProgram("data/test_vs.glsl", "data/test_fs.glsl");
-    ShaderProgram* prog2 = shaderMan.makeShaderProgram("data/test_vs.glsl", "data/test_fs.glsl");
+    // TEMPORARY CODE
+    std::unique_ptr<ShaderProgram> prog = graphics.makeShaderProgram("data/test_vs.glsl", "data/test_fs.glsl");
+    std::unique_ptr<ShaderProgram> prog2 = graphics.makeShaderProgram("data/test_vs.glsl", "data/test_fs.glsl");
     std::vector<Vec3> vertices = { Vec3{ 0.0f,  .5f, 0.0f},
                                    Vec3{  .5f, -.5f, 0.0f},
                                    Vec3{ -.5f, -.5f, 0.0f} };

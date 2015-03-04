@@ -2,7 +2,8 @@
 #define GLENGINE_SHADERMAN_HPP
 
 #include "engine/graphics/shaderprog.hpp"
-#include "engine/util/logger.hpp"
+#include "engine/graphics/vertshader.hpp"
+#include "engine/graphics/fragshader.hpp"
 
 #include <map>
 
@@ -16,19 +17,20 @@ class Shader;
  */
 class ShaderManager
 {
-    //friend class Graphics;
+    friend class Graphics;
 public:
-    /*! @brief Create a shader manager
-     */
-    ShaderManager();
     ~ShaderManager();
     
     /*! @brief Make a shader program
      */
-    ShaderProgram* makeShaderProgram(const std::string& vsPath, const std::string& fsPath);
+    std::unique_ptr<ShaderProgram> makeShaderProgram(const std::string& vsPath, const std::string& fsPath);
 private:
-    std::map<std::string, VertexShader*> vertexShaderCache;
-    std::map<std::string, FragmentShader*> fragmentShaderCache;
+    /*! @brief Create a shader manager
+     */
+    ShaderManager();
+    
+    std::map<std::string, std::unique_ptr<VertexShader>> vertexShaderCache;
+    std::map<std::string, std::unique_ptr<FragmentShader>> fragmentShaderCache;
 };
 
 }

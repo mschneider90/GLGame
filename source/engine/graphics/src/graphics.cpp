@@ -1,5 +1,6 @@
 #include "engine/graphics/graphics.hpp"
 #include "engine/graphics/window.hpp"
+#include "engine/graphics/shaderman.hpp"
 #include "engine/util/resolution.hpp"
 #include "engine/util/logger.hpp"
 #include "engine/util/gl.hpp"
@@ -21,7 +22,7 @@ GLEngine::Graphics::Graphics(const std::string& windowTitle, const Resolution& w
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     
     // OpenGL context is alive after this call
-    m_window = std::unique_ptr<Window>(new GLEngine::Window(windowTitle, windowRes));
+    m_window = std::unique_ptr<GLEngine::Window>(new GLEngine::Window(windowTitle, windowRes));
 
     // GLEW handles openGL extensions
     glewExperimental = GL_TRUE;
@@ -31,10 +32,13 @@ GLEngine::Graphics::Graphics(const std::string& windowTitle, const Resolution& w
     
     // 4x antialiasing
     glfwWindowHint(GLFW_SAMPLES, windowSamples);
+    
+    m_shaderMan = std::unique_ptr<GLEngine::ShaderManager>(new GLEngine::ShaderManager());
 }
 
 GLEngine::Graphics::~Graphics()
 {
+    m_shaderMan.reset();
     m_window.reset();
     glfwTerminate();
 }
@@ -44,11 +48,18 @@ GLEngine::Window& GLEngine::Graphics::getWindowInstance()
     return *m_window;
 }
 
+std::unique_ptr<GLEngine::ShaderProgram> 
+GLEngine::Graphics::makeShaderProgram(const std::string& vsPath,
+                                      const std::string& fsPath)
+{
+    return m_shaderMan->makeShaderProgram(vsPath, fsPath);
+}
+
 void GLEngine::Graphics::draw(const GLEngine::Mesh& mesh, const GLEngine::ShaderProgram& prog)
 {
-    glUseProgram (prog.getProgramIndex());
+    glUseProgram(prog.getProgramIndex());
     glBindVertexArray(mesh.getAttributeIndex());
-    glDrawArrays (GL_TRIANGLES, 0, mesh.getNumVertices());
+    glDrawArrays(GL_TRIANGLES, 0, mesh.getNumVertices());
 }
 
 void GLEngine::Graphics::swapFrameBuffer()

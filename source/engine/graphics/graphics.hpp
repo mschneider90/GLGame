@@ -16,6 +16,7 @@ namespace GLEngine
 {
 
 class Window;
+class ShaderManager;
 
 /*! @brief Allows for creating a window and drawing to the screen
  */
@@ -39,9 +40,13 @@ public:
 
     /*! @brief Get the instance of the currently open Window
      *  
-     *  @return A pointer to the Window.
+     *  @return A reference to the Window.
      */
     Window& getWindowInstance();
+    
+    /*! @brief Create a ShaderProgram from the specified source files
+     */
+    std::unique_ptr<ShaderProgram> makeShaderProgram(const std::string& vsPath, const std::string& fsPath); 
 
     /*! @brief Swap the framebuffers
      */
@@ -72,6 +77,7 @@ private:
     Graphics& operator=(const Graphics& g) = delete;
     
     std::unique_ptr<Window> m_window;
+    std::unique_ptr<ShaderManager> m_shaderMan;
 };
 
 }
