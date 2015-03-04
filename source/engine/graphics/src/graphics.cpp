@@ -7,8 +7,7 @@
 #include <stdexcept>
 #include <string>
 
-GLEngine::Graphics::Graphics(const std::string& title,
-                             const Resolution& res) : window(nullptr)
+GLEngine::Graphics::Graphics(const std::string& windowTitle, const Resolution& windowRes, int windowSamples)
 {
     glfwSetErrorCallback(glfwErrorCallback);
     if (!glfwInit()) {
@@ -16,37 +15,33 @@ GLEngine::Graphics::Graphics(const std::string& title,
     }
     
     // Use OpenGL 3.2 for now
-    glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 2);
-    glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     
-    // 4x antialiasing
-    glfwWindowHint (GLFW_SAMPLES, 4);
-
     // OpenGL context is alive after this call
-    window = new Window(title, res);
+    m_window = std::unique_ptr<Window>(new GLEngine::Window(windowTitle, windowRes));
 
     // GLEW handles openGL extensions
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK) {
         throw std::runtime_error("graphics: glew initialization failed");
     }
-
-    // Depth testing only draws a pixel if it's visible
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
+    
+    // 4x antialiasing
+    glfwWindowHint(GLFW_SAMPLES, windowSamples);
 }
 
 GLEngine::Graphics::~Graphics()
 {
-    delete window;
+    m_window.reset();
     glfwTerminate();
 }
 
-GLEngine::Window* GLEngine::Graphics::getWindowInstance()
+GLEngine::Window& GLEngine::Graphics::getWindowInstance()
 {
-    return window;
+    return *m_window;
 }
 
 void GLEngine::Graphics::draw(const GLEngine::Mesh& mesh, const GLEngine::ShaderProgram& prog)
@@ -58,7 +53,7 @@ void GLEngine::Graphics::draw(const GLEngine::Mesh& mesh, const GLEngine::Shader
 
 void GLEngine::Graphics::swapFrameBuffer()
 {
-    glfwSwapBuffers(window->getGLFWwindow());
+    glfwSwapBuffers(m_window->getGLFWwindow());
 }
 
 void GLEngine::Graphics::clearFrameBuffer()

@@ -5,13 +5,13 @@
 #include <stdexcept>
 
 GLEngine::Window::Window(const std::string& title,
-                         const GLEngine::Resolution& res) : window(nullptr), input(nullptr)
+                         const GLEngine::Resolution& res) : m_window(nullptr), m_input(nullptr)
 {
-    const GLFWmonitor* monitor = nullptr;
-    const GLFWwindow* share = nullptr;
-    window = glfwCreateWindow(res.x, res.y, title.c_str(), nullptr, nullptr);
-    if (window) {
-        glfwMakeContextCurrent(window);
+    GLFWmonitor* const monitor = nullptr;
+    GLFWwindow* const share = nullptr;
+    m_window = glfwCreateWindow(res.x, res.y, title.c_str(), monitor, share);
+    if (m_window) {
+        glfwMakeContextCurrent(m_window);
         return;
     }
 
@@ -21,24 +21,20 @@ GLEngine::Window::Window(const std::string& title,
 
 GLEngine::Window::~Window()
 {
-    glfwDestroyWindow(window);
-    window = nullptr;
-
-    if (input) {
-        delete input;
-    }
+    glfwDestroyWindow(m_window);
+    m_window = nullptr;
 }
 
-GLEngine::Input* GLEngine::Window::getInputInstance() 
+GLEngine::Input& GLEngine::Window::getInputInstance() 
 {
-    if (!input) {
-        input = new GLEngine::Input(window);
+    if (!m_input) {
+        m_input = std::unique_ptr<GLEngine::Input>(new GLEngine::Input(m_window));
     }
     
-    return input;
+    return *m_input;
 }
 
 GLFWwindow* GLEngine::Window::getGLFWwindow() {
-    return window;
+    return m_window;
 }
 

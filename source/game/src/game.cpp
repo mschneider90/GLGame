@@ -21,9 +21,9 @@ void Game::play()
     Logger::logMessage("Beginning OpenGL initialization...");
     
     // TODO init sound object and other game objects
-    Graphics graphics("GLGame", Resolution { 640, 480 });
-    Window* window = graphics.getWindowInstance();
-    Input* input = window->getInputInstance();
+    Graphics graphics("GLGame", Resolution { 640, 480 }, 4);
+    Window& window = graphics.getWindowInstance();
+    Input& input = window.getInputInstance();
 
     Logger::logMessage("OpenGL initialization complete");
     Logger::logMessage(std::string("GPU    : ").append(graphics.getRendererName()));
@@ -45,8 +45,8 @@ void Game::play()
         graphics.clearFrameBuffer();
         
         // check for input
-        input->pollEvents();
-        if (input->isKeyPressed(Key::ESC)) {
+        input.pollEvents();
+        if (input.isKeyPressed(Key::ESC)) {
             exit = true;
         }
         

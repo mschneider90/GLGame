@@ -2,8 +2,10 @@
 #define GLENGINE_WINDOW_HPP
 
 #include "engine/util/resolution.hpp"
+#include "engine/input/input.hpp"
 
 #include <string>
+#include <memory>
 
 class GLFWwindow;
 
@@ -21,9 +23,9 @@ class Window
 public:
     /*! @brief Get an instance to the Input for this Window
      *
-     *  @return A pointer to the Input instance. Guaranteed to not be null.
+     *  @return A pointer to the Input instance.
      */
-    Input* getInputInstance();
+    Input& getInputInstance();
     
     /*! @brief Destroy the Window
      */
@@ -31,13 +33,16 @@ public:
 private:
     // Window creation should happen only from Graphics
     friend class Graphics;
+    
+    Window(const Window& w) = delete;
+    Window& operator=(const Window& w) = delete;
 
     Window(const std::string& title, const Resolution& res);
     
     GLFWwindow* getGLFWwindow();
-    GLFWwindow* window;
+    GLFWwindow* m_window;
 
-    Input* input;
+    std::unique_ptr<Input> m_input;
 };
 
 }

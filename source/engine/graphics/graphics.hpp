@@ -2,6 +2,9 @@
 #define GLENGINE_GRAPHICS_HPP
 
 #include "engine/util/resolution.hpp"
+#include "engine/graphics/window.hpp"
+
+// TEMP
 #include "engine/graphics/mesh.hpp"
 #include "engine/graphics/shaderprog.hpp"
 
@@ -24,10 +27,11 @@ public:
      *  Initializes the OpenGL environment and context. Opens a Window whose
      *  reference can be obtained with getWindowInstance()
      * 
-     *  @param title The title of the Window
-     *  @param res The resolution of the Window
+     *  @param windowTitle The title of the Window
+     *  @param windowRes The resolution of the Window
+     *  @param windowSamples The number of anti-aliasing samples to use for the Window
      */
-    Graphics(const std::string& title, const Resolution& res);
+    Graphics(const std::string& windowTitle, const Resolution& windowRes, int windowSamples = 0);
 
     /*! @brief Destroy a Graphics object
      */
@@ -35,9 +39,9 @@ public:
 
     /*! @brief Get the instance of the currently open Window
      *  
-     *  @return A pointer to the Window. Guaranteed to not be null.
+     *  @return A pointer to the Window.
      */
-    Window* getWindowInstance();
+    Window& getWindowInstance();
 
     /*! @brief Swap the framebuffers
      */
@@ -64,7 +68,10 @@ public:
     std::string getOpenGLVersion();
 
 private:
-    Window* window;
+    Graphics(const Graphics& g) = delete;
+    Graphics& operator=(const Graphics& g) = delete;
+    
+    std::unique_ptr<Window> m_window;
 };
 
 }

@@ -28,12 +28,18 @@ public:
      *  @return True if the key has been pressed, false otherwise
      */
     bool isKeyPressed(Key k);
+    
+    /*! @brief Destroy the Input
+     */
+    ~Input();
 private:
     // Input corresponds to a Window, so only Window should be able to create this
     friend class Window;
 
     Input(GLFWwindow* win);
-    ~Input();
+    
+    Input(const Input& i) = delete;
+    Input& operator=(const Input& i) = delete;
 
     GLFWwindow* window;
 };
