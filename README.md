@@ -26,11 +26,11 @@ GLGame can then be run from the bin/ directory.
 
 ##Documentation
 0. Go to the docs directory
-  * `cd docs`
+  * `cd docs/doxyfiles`
 1. Run doxygen
   * `doxygen GLEngine.doxy`
   * `doxygen GLGame.doxy`
 
-Now contents of docs/GLEngine/ and docs/GLGame/ should be generated. Open index.html in your web browser to view the documentation.
+Now the contents of docs/GLEngine/ and docs/GLGame/ should be generated. Open index.html in your web browser to view the documentation.
 
 
