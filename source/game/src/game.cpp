@@ -31,8 +31,7 @@ void Game::play(Engine& engine)
     std::vector<Vec3> vertices = { Vec3{ 0.0f,  .5f, 0.0f},
                                    Vec3{  .5f, -.5f, 0.0f},
                                    Vec3{ -.5f, -.5f, 0.0f} };
-    // temp pls dont do this
-    Mesh mesh(logger, vertices);
+    std::unique_ptr<Mesh> mesh = graphics->makeMesh(vertices);
 
     // main game loop goes here
     logger->logMessage("Entering game loop...");
@@ -49,7 +48,7 @@ void Game::play(Engine& engine)
         // update game state (TODO)
         
         // draw stuff
-        graphics->draw(mesh, *prog);
+        graphics->draw(*mesh, *prog);
         
         graphics->swapFrameBuffer();
     }

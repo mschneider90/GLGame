@@ -39,6 +39,10 @@ public:
     /*! @brief Create a ShaderProgram from the specified source files
      */
     std::unique_ptr<ShaderProgram> makeShaderProgram(const std::string& vsPath, const std::string& fsPath); 
+    
+    /*! @brief Create a Mesh from the vertices
+     */
+    std::unique_ptr<Mesh> makeMesh(const std::vector<Vec3>& vertices);
 
     /*! @brief Swap the framebuffers
      */

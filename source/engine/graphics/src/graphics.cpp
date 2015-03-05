@@ -64,6 +64,12 @@ GLEngine::Graphics::makeShaderProgram(const std::string& vsPath,
     return m_shaderMan->makeShaderProgram(vsPath, fsPath);
 }
 
+std::unique_ptr<GLEngine::Mesh>
+GLEngine::Graphics::makeMesh(const std::vector<Vec3>& vertices)
+{
+    return std::unique_ptr<Mesh>(new Mesh(m_logger, vertices));
+}
+
 void GLEngine::Graphics::draw(const GLEngine::Mesh& mesh, const GLEngine::ShaderProgram& prog)
 {
     glUseProgram(prog.getProgramIndex());
