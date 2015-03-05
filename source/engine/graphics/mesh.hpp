@@ -12,7 +12,7 @@ namespace GLEngine
 
 class Logger;
 
-/*! @brief Represents mesh which is a collection of vertices that define a shape
+/*! @brief Represents a mesh, which is a collection of vertices that define a shape
  */
 class Mesh
 {

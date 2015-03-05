@@ -10,7 +10,7 @@ namespace GLEngine
 
 class Logger;
 
-/*! @brief Represents a shader program (abstract)
+/*! @brief Represents an abstract shader program
  *
  *  The shader will be loaded from disk from a ASCII text format (.glsl), and then compiled
  */

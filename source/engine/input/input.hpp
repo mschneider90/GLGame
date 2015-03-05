@@ -9,10 +9,12 @@ namespace GLEngine
 enum class Key : int;
 class Window;
 
-/*! @brief Allows checking keyboard and mouse input
+/*! @brief Allows for checking keyboard and mouse input
  */
 class Input
 {
+    // Input corresponds to a Window, so only Window should be able to create this
+    friend class Window;
 public:
     /*! @brief Poll events from the OS. Should be called every frame.
      */
@@ -33,9 +35,6 @@ public:
      */
     ~Input();
 private:
-    // Input corresponds to a Window, so only Window should be able to create this
-    friend class Window;
-
     Input(GLFWwindow* win);
     
     Input(const Input& i) = delete;

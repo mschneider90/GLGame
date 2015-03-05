@@ -10,22 +10,29 @@ namespace GLEngine
 
 /*! @brief Provides the ability to generate a log file
  *
+ *  Allows for two logging modes: non-critical and critical. Non-critical is stored
+ *  in memory until the object is destroyed, upon which it is dumped to disk. Critical
+ *  messages are dumped to disk immediately.
  */
 class Logger
 {
     friend class Engine;
 public:
-    /*! @brief Destroy the Logger and dump the contents to disk
+    /*! @brief Destroy the Logger and dump the (non-critical) contents to disk
      */
     ~Logger();
     
     /*! @brief Log a message
      * 
-     *  @param msg The message to be logged
+     *  @param message The message to be logged
+     *  @param incrementCount Increment the message count
+     *  @param critical Is this a critical message
      */
-    void logMessage(std::string msg, bool incrementCount = true, bool critical = false);
+    void logMessage(std::string message, bool incrementCount = true, bool critical = false);
     
     /*! @brief Get the log file name
+     *
+     *  @return The name of the log file on disk
      */
     std::string getLogFileName();
 private:
