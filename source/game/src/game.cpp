@@ -13,8 +13,6 @@
 #include "engine/graphics/mesh.hpp"
 #include "engine/util/vectors.hpp"
 
-#include <iostream>
-
 using namespace GLEngine;
 
 void Game::play(Engine& engine)
