@@ -1,4 +1,0 @@
-1. Integrate doxygen into cmake build process (make docs)
-2. Namespace the engine/game stuff
-3. Move main.cpp into game/ ?
-4. Separate the game/ and engine/ docs? e.g., engine_html/ and game_html/
