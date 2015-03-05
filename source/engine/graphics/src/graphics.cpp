@@ -9,8 +9,13 @@
 #include <string>
 
 using GLEngine::Graphics;
+using GLEngine::Resolution;
+using GLEngine::Window;
+using GLEngine::ShaderProgram;
+using GLEngine::Mesh;
+using GLEngine::ShaderManager;
 
-GLEngine::Graphics::Graphics(std::shared_ptr<Logger> logger, 
+Graphics::Graphics(std::shared_ptr<Logger> logger, 
                              const std::string& windowTitle,
                              const Resolution& windowRes,
                              int windowSamples) : m_logger(logger)
@@ -27,7 +32,7 @@ GLEngine::Graphics::Graphics(std::shared_ptr<Logger> logger,
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     
     // OpenGL context is alive after this call
-    m_window = std::shared_ptr<GLEngine::Window>(new GLEngine::Window(m_logger, windowTitle, windowRes));
+    m_window = std::shared_ptr<Window>(new Window(m_logger, windowTitle, windowRes));
 
     // GLEW handles openGL extensions
     glewExperimental = GL_TRUE;
@@ -35,11 +40,11 @@ GLEngine::Graphics::Graphics(std::shared_ptr<Logger> logger,
         throw std::runtime_error("graphics: glew initialization failed");
     }
     
-    // 4x antialiasing
+    // set antialiasing
     glfwWindowHint(GLFW_SAMPLES, windowSamples);
 }
 
-GLEngine::Graphics::~Graphics()
+Graphics::~Graphics()
 {
     m_shaderMan.reset();
     if (!m_window.unique()) {
@@ -49,50 +54,50 @@ GLEngine::Graphics::~Graphics()
     glfwTerminate();
 }
 
-std::shared_ptr<GLEngine::Window> GLEngine::Graphics::getWindowInstance()
+std::shared_ptr<Window> Graphics::getWindowInstance()
 {
     return m_window;
 }
 
-std::unique_ptr<GLEngine::ShaderProgram> 
-GLEngine::Graphics::makeShaderProgram(const std::string& vsPath,
+std::unique_ptr<ShaderProgram> 
+Graphics::makeShaderProgram(const std::string& vsPath,
                                       const std::string& fsPath)
 {
     if (!m_shaderMan) {         
-        m_shaderMan = std::unique_ptr<GLEngine::ShaderManager>(new GLEngine::ShaderManager(m_logger));
+        m_shaderMan = std::unique_ptr<ShaderManager>(new ShaderManager(m_logger));
     }
     return m_shaderMan->makeShaderProgram(vsPath, fsPath);
 }
 
-std::unique_ptr<GLEngine::Mesh>
-GLEngine::Graphics::makeMesh(const std::vector<Vec3>& vertices)
+std::unique_ptr<Mesh>
+Graphics::makeMesh(const std::vector<Vec3>& vertices)
 {
     return std::unique_ptr<Mesh>(new Mesh(m_logger, vertices));
 }
 
-void GLEngine::Graphics::draw(const GLEngine::Mesh& mesh, const GLEngine::ShaderProgram& prog)
+void Graphics::draw(const Mesh& mesh, const ShaderProgram& prog)
 {
     glUseProgram(prog.getProgramIndex());
     glBindVertexArray(mesh.getAttributeIndex());
     glDrawArrays(GL_TRIANGLES, 0, mesh.getNumVertices());
 }
 
-void GLEngine::Graphics::swapFrameBuffer()
+void Graphics::swapFrameBuffer()
 {
     glfwSwapBuffers(m_window->getGLFWwindow());
 }
 
-void GLEngine::Graphics::clearFrameBuffer()
+void Graphics::clearFrameBuffer()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-std::string GLEngine::Graphics::getRendererName()
+std::string Graphics::getRendererName()
 {
     return reinterpret_cast<const char*>(glGetString(GL_RENDERER));
 }
 
-std::string GLEngine::Graphics::getOpenGLVersion()
+std::string Graphics::getOpenGLVersion()
 {
     return reinterpret_cast<const char*>(glGetString(GL_VERSION));
 }

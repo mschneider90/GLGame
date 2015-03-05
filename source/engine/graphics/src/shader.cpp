@@ -7,7 +7,9 @@
 #include <stdexcept>
 #include <memory>
 
-GLEngine::Shader::Shader(std::shared_ptr<Logger> logger,
+using GLEngine::Shader;
+
+Shader::Shader(std::shared_ptr<Logger> logger,
                          const std::string& fileName) : m_logger(logger), shaderIndex(0), shaderInit(false)
 {
     std::ifstream in;
@@ -27,12 +29,12 @@ GLEngine::Shader::Shader(std::shared_ptr<Logger> logger,
     logger->logMessage(std::string("Read shader from ").append(fileName));
 }
 
-GLEngine::Shader::~Shader()
+Shader::~Shader()
 {
 
 }
 
-unsigned int GLEngine::Shader::getShaderIndex() 
+unsigned int Shader::getShaderIndex() 
 {   
     if (!shaderInit) {
         // Defer shader creation/compilation to here since this a virtual function
@@ -45,7 +47,7 @@ unsigned int GLEngine::Shader::getShaderIndex()
     return static_cast<unsigned int>(shaderIndex);
 }
 
-void GLEngine::Shader::compileShader()
+void Shader::compileShader()
 {
     const int SHADER_COUNT = 1;
     const GLint* SHADER_LENGTH = nullptr;

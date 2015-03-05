@@ -5,9 +5,13 @@
 #include "engine/util/gl.hpp"
 #include <stdexcept>
 
-GLEngine::Window::Window(std::shared_ptr<Logger> logger,
+using GLEngine::Window;
+using GLEngine::Resolution;
+using GLEngine::Input;
+
+Window::Window(std::shared_ptr<Logger> logger,
                          const std::string& title,
-                         const GLEngine::Resolution& res) : m_logger(logger), m_window(nullptr), m_input(nullptr)
+                         const Resolution& res) : m_logger(logger), m_window(nullptr), m_input(nullptr)
 {
     GLFWmonitor* const monitor = nullptr;
     GLFWwindow* const share = nullptr;
@@ -21,7 +25,7 @@ GLEngine::Window::Window(std::shared_ptr<Logger> logger,
     throw std::runtime_error("graphics: Window initialized failed");
 }
 
-GLEngine::Window::~Window()
+Window::~Window()
 {
     if (!m_input.unique()) {
         m_logger->logMessage("graphics: Input should not be alive after window destruction, deleting now");
@@ -31,16 +35,16 @@ GLEngine::Window::~Window()
     m_window = nullptr;
 }
 
-std::shared_ptr<GLEngine::Input> GLEngine::Window::getInputInstance() 
+std::shared_ptr<Input> Window::getInputInstance() 
 {
     if (!m_input) {
-        m_input = std::shared_ptr<GLEngine::Input>(new GLEngine::Input(m_window));
+        m_input = std::shared_ptr<Input>(new Input(m_window));
     }
     
     return m_input;
 }
 
-GLFWwindow* GLEngine::Window::getGLFWwindow() {
+GLFWwindow* Window::getGLFWwindow() {
     return m_window;
 }
 

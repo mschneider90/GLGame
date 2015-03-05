@@ -5,25 +5,28 @@
 #include "engine/util/gl.hpp"
 #include <stdexcept>
 
-GLEngine::Input::Input(GLFWwindow* win) : window(win)
+using GLEngine::Input;
+using GLEngine::Key;
+
+Input::Input(GLFWwindow* win) : window(win)
 {
     glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
 }
 
-GLEngine::Input::~Input()
+Input::~Input()
 {
 
 }
 
-void GLEngine::Input::pollEvents()
+void Input::pollEvents()
 {
     glfwPollEvents();
 }
 
-bool GLEngine::Input::isKeyPressed(Key k)
+bool Input::isKeyPressed(Key k)
 {
     // Special case - ESC also checks if the window wants to be closed
-    if (k == GLEngine::Key::ESC) {
+    if (k == Key::ESC) {
         if (glfwWindowShouldClose(window)) {
             return true;
         }

@@ -6,9 +6,13 @@
 
 #include <memory>
 
-GLEngine::ShaderProgram::ShaderProgram(std::shared_ptr<Logger> logger,
-                                       VertexShader& vs,
-                                       FragmentShader& fs) : m_logger(logger), programIndex(0)
+using GLEngine::ShaderProgram;
+using GLEngine::VertexShader;
+using GLEngine::FragmentShader;
+
+ShaderProgram::ShaderProgram(std::shared_ptr<Logger> logger,
+                             VertexShader& vs,
+                             FragmentShader& fs) : m_logger(logger), programIndex(0)
 {
     programIndex = glCreateProgram();
     glAttachShader(programIndex, vs.getShaderIndex());
@@ -29,12 +33,12 @@ GLEngine::ShaderProgram::ShaderProgram(std::shared_ptr<Logger> logger,
     }
 }
 
-GLEngine::ShaderProgram::~ShaderProgram()
+ShaderProgram::~ShaderProgram()
 {
 
 }
 
-unsigned int GLEngine::ShaderProgram::getProgramIndex() const
+unsigned int ShaderProgram::getProgramIndex() const
 {
     return static_cast<unsigned int>(programIndex);
 }
