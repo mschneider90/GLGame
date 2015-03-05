@@ -27,7 +27,7 @@ GLEngine::Graphics::Graphics(std::shared_ptr<Logger> logger,
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     
     // OpenGL context is alive after this call
-    m_window = std::shared_ptr<GLEngine::Window>(new GLEngine::Window(windowTitle, windowRes));
+    m_window = std::shared_ptr<GLEngine::Window>(new GLEngine::Window(m_logger, windowTitle, windowRes));
 
     // GLEW handles openGL extensions
     glewExperimental = GL_TRUE;

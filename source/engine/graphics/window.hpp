@@ -13,6 +13,7 @@ namespace GLEngine
 {
 
 class Input;
+class Logger;
 
 /*! @brief Represents the program window on the screen
  *
@@ -25,7 +26,7 @@ public:
      *
      *  @return A pointer to the Input instance.
      */
-    Input& getInputInstance();
+    std::shared_ptr<Input> getInputInstance();
     
     /*! @brief Destroy the Window
      */
@@ -37,12 +38,13 @@ private:
     Window(const Window& w) = delete;
     Window& operator=(const Window& w) = delete;
 
-    Window(const std::string& title, const Resolution& res);
+    Window(std::shared_ptr<Logger> logger, const std::string& title, const Resolution& res);
     
     GLFWwindow* getGLFWwindow();
     GLFWwindow* m_window;
 
-    std::unique_ptr<Input> m_input;
+    std::shared_ptr<Input> m_input;
+    std::shared_ptr<Logger> m_logger;
 };
 
 }

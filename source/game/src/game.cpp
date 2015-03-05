@@ -23,7 +23,7 @@ void Game::play(Engine& engine)
     std::shared_ptr<Logger> logger = engine.getLoggerInstance();
     std::shared_ptr<Graphics> graphics = engine.getGraphicsInstance(Resolution { 640, 480 }, 4);
     std::shared_ptr<Window> window = graphics->getWindowInstance();
-    Input& input = window->getInputInstance();
+    std::shared_ptr<Input> input = window->getInputInstance();
     
     // TEMPORARY CODE
     std::unique_ptr<ShaderProgram> prog = graphics->makeShaderProgram("data/test_vs.glsl", "data/test_fs.glsl");
@@ -41,8 +41,8 @@ void Game::play(Engine& engine)
         graphics->clearFrameBuffer();
         
         // check for input
-        input.pollEvents();
-        if (input.isKeyPressed(Key::ESC)) {
+        input->pollEvents();
+        if (input->isKeyPressed(Key::ESC)) {
             exit = true;
         }
         
