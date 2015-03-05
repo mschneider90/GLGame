@@ -35,7 +35,12 @@ private:
      */
     Logger(bool forceCritical = false);
     
+    /*! @brief Format the message
+     */
     std::string formatMessage(const std::string& msg);
+    
+    Logger(const Logger&) = delete;
+    Logger& operator=(const Logger&) = delete;
     
     const std::string FILE_NAME = "GLEngine.log";
     

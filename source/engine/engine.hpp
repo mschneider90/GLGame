@@ -26,8 +26,7 @@ public:
      */
     std::shared_ptr<Graphics> getGraphicsInstance(const Resolution& res, int samples = 0);
     
-    /*! @brief TODO
-     */
+    // TODO
     //std::shared_ptr<Sound> getSoundInstance();
     
     /*! @brief
@@ -39,6 +38,9 @@ public:
     ~Engine();
 private:
     Engine();
+    
+    Engine(const Engine&) = delete;
+    Engine& operator=(const Engine&) = delete;
 
     std::mutex access;
     

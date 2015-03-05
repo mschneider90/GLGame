@@ -33,6 +33,9 @@ public:
      */
     unsigned int getAttributeIndex() const;
 private:
+    Mesh(Mesh&) = delete;
+    Mesh& operator=(Mesh&) = delete;
+    
     unsigned int numVertices;
     GLuint attributeIndex;
     std::shared_ptr<Logger> m_logger;

@@ -28,6 +28,9 @@ protected:
 private:
     void compileShader();
     
+    Shader(Shader&) = delete;
+    Shader& operator=(Shader&) = delete;
+    
     std::shared_ptr<Logger> m_logger;
     GLuint shaderIndex;
     bool shaderInit;

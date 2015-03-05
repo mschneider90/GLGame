@@ -25,6 +25,9 @@ private:
      */
     VertexShader(std::shared_ptr<Logger> logger, const std::string& fileName);
     
+    VertexShader(const VertexShader&) = delete;
+    VertexShader& operator=(const VertexShader&) = delete;
+    
     GLuint createShader();
 };
 
