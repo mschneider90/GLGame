@@ -3,9 +3,12 @@
 
 #include "engine/util/gl.hpp"
 #include <string>
+#include <memory>
 
 namespace GLEngine
 {
+
+class Logger;
 
 /*! @brief Represents a shader program (abstract)
  *
@@ -18,13 +21,14 @@ public:
      */
     unsigned int getShaderIndex();
 protected:
-    Shader(const std::string& fileName);
+    Shader(std::shared_ptr<Logger> logger, const std::string& fileName);
     virtual ~Shader();
     
     virtual GLuint createShader() = 0;
 private:
     void compileShader();
     
+    std::shared_ptr<Logger> m_logger;
     GLuint shaderIndex;
     bool shaderInit;
     std::string shaderText;

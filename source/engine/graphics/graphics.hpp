@@ -15,25 +15,17 @@ class GLFWwindow;
 namespace GLEngine
 {
 
+class Engine;
 class Window;
 class ShaderManager;
+class Logger;
 
 /*! @brief Allows for creating a window and drawing to the screen
  */
 class Graphics
 {
+    friend class Engine;
 public:
-    /*! @brief Intanstiate a Graphics object
-     *
-     *  Initializes the OpenGL environment and context. Opens a Window whose
-     *  reference can be obtained with getWindowInstance()
-     * 
-     *  @param windowTitle The title of the Window
-     *  @param windowRes The resolution of the Window
-     *  @param windowSamples The number of anti-aliasing samples to use for the Window
-     */
-    Graphics(const std::string& windowTitle, const Resolution& windowRes, int windowSamples = 0);
-
     /*! @brief Destroy a Graphics object
      */
     ~Graphics();
@@ -42,7 +34,7 @@ public:
      *  
      *  @return A reference to the Window.
      */
-    Window& getWindowInstance();
+    std::shared_ptr<Window> getWindowInstance();
     
     /*! @brief Create a ShaderProgram from the specified source files
      */
@@ -73,11 +65,26 @@ public:
     std::string getOpenGLVersion();
 
 private:
+    /*! @brief Intanstiate a Graphics object
+     *
+     *  Initializes the OpenGL environment and context. Opens a Window whose
+     *  reference can be obtained with getWindowInstance()
+     * 
+     *  @param windowTitle The title of the Window
+     *  @param windowRes The resolution of the Window
+     *  @param windowSamples The number of anti-aliasing samples to use for the Window
+     */
+    Graphics(std::shared_ptr<Logger> logger,
+             const std::string& windowTitle,
+             const Resolution& windowRes,
+             int windowSamples = 0);
+    
     Graphics(const Graphics& g) = delete;
     Graphics& operator=(const Graphics& g) = delete;
     
-    std::unique_ptr<Window> m_window;
+    std::shared_ptr<Window> m_window;
     std::unique_ptr<ShaderManager> m_shaderMan;
+    std::shared_ptr<Logger> m_logger;
 };
 
 }

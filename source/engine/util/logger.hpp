@@ -9,41 +9,41 @@ namespace GLEngine
 {
 
 /*! @brief Provides the ability to generate a log file
- * 
- *  Logs to memory then dumps the log to disk when the object is destroyed.
- *  This could be extended in the future to dump directly to disk in case
- *  we're encountering scenarios where the program isn't terminating nicely.
  *
- *  The design of this class assumes that you'll instantiate as a local
- *  variable in your main function and that when that function returns
- *  the log will be written.
  */
 class Logger
 {
+    friend class Engine;
 public:
-    /*! @brief Instantiate the Logger
-     * 
-     *  @param fileName The path of the log file to be written
-     */
-    Logger(const std::string& fileName);
-    
     /*! @brief Destroy the Logger and dump the contents to disk
      */
     ~Logger();
     
     /*! @brief Log a message
      * 
-     *  This implementation only writes the message to memory. The memory
-     *  is dumped to disk when the object is destroyed. Thread safe.
-     *
      *  @param msg The message to be logged
      */
-    static void logMessage(std::string msg);
+    void logMessage(std::string msg, bool incrementCount = true, bool critical = false);
+    
+    /*! @brief Get the log file name
+     */
+    std::string getLogFileName();
 private:
-    std::mutex openMutex;
-    static bool isOpen;
-    static std::vector<std::string> log;
-    std::ofstream logFile;
+    /*! @brief Instantiate the Logger
+     * 
+     *  @param forceCritical Force critical messages (dump to disk immediately)
+     */
+    Logger(bool forceCritical = false);
+    
+    std::string formatMessage(const std::string& msg);
+    
+    const std::string FILE_NAME = "GLEngine.log";
+    
+    std::vector<std::string> m_log;
+    bool m_forceCritical;
+    unsigned int m_msgNum;
+    std::mutex m_access;
+    std::ofstream m_logFile;
 };
 
 }

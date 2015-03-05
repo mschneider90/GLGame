@@ -1,2 +1,2 @@
 include_directories(../.)
-add_library(input input.cpp)
+add_library(GLEngineInput input.cpp)

@@ -5,8 +5,10 @@
 #include <fstream>
 #include <string>
 #include <stdexcept>
+#include <memory>
 
-GLEngine::Shader::Shader(const std::string& fileName) : shaderIndex(0), shaderInit(false)
+GLEngine::Shader::Shader(std::shared_ptr<Logger> logger,
+                         const std::string& fileName) : m_logger(logger), shaderIndex(0), shaderInit(false)
 {
     std::ifstream in;
     
@@ -22,7 +24,7 @@ GLEngine::Shader::Shader(const std::string& fileName) : shaderIndex(0), shaderIn
     in.read(&shaderText[0], shaderText.size()); 
     in.close();
     
-    GLEngine::Logger::logMessage(std::string("Read shader from ").append(fileName));
+    logger->logMessage(std::string("Read shader from ").append(fileName));
 }
 
 GLEngine::Shader::~Shader()
@@ -60,7 +62,7 @@ void GLEngine::Shader::compileShader()
         int actualLogLength = 0;
         char log[maxLogLength];
         glGetShaderInfoLog(shaderIndex, maxLogLength, &actualLogLength, log);
-        GLEngine::Logger::logMessage(std::string(log));
+        m_logger->logMessage(std::string(log));
         throw std::runtime_error("graphics: shader compilation failed");
     }
      

@@ -27,10 +27,12 @@ public:
 private:
     /*! @brief Create a shader manager
      */
-    ShaderManager();
+    ShaderManager(std::shared_ptr<Logger> logger);
     
     std::map<std::string, std::unique_ptr<VertexShader>> vertexShaderCache;
     std::map<std::string, std::unique_ptr<FragmentShader>> fragmentShaderCache;
+    
+    std::shared_ptr<Logger> m_logger;
 };
 
 }

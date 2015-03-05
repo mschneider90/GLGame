@@ -6,8 +6,9 @@
 
 #include <memory>
 
-GLEngine::ShaderProgram::ShaderProgram(VertexShader& vs,
-                                       FragmentShader& fs) : programIndex(0)
+GLEngine::ShaderProgram::ShaderProgram(std::shared_ptr<Logger> logger,
+                                       VertexShader& vs,
+                                       FragmentShader& fs) : m_logger(logger), programIndex(0)
 {
     programIndex = glCreateProgram();
     glAttachShader(programIndex, vs.getShaderIndex());
@@ -23,7 +24,7 @@ GLEngine::ShaderProgram::ShaderProgram(VertexShader& vs,
         int actualLogLength = 0;
         char log[maxLogLength];
         glGetProgramInfoLog(programIndex, maxLogLength, &actualLogLength, log);
-        GLEngine::Logger::logMessage(std::string(log));
+        logger->logMessage(std::string(log));
         throw std::runtime_error("graphics: shader linking failed");
     }
 }

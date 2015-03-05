@@ -1,6 +1,7 @@
 #include "engine/graphics/fragshader.hpp"
 
-GLEngine::FragmentShader::FragmentShader(const std::string& fileName) : Shader(fileName)
+GLEngine::FragmentShader::FragmentShader(std::shared_ptr<Logger> logger,
+                                         const std::string& fileName) : Shader(logger, fileName)
 {
 
 }

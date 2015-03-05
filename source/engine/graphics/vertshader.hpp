@@ -3,10 +3,13 @@
 
 #include "engine/graphics/shader.hpp"
 
+#include <memory>
+
 namespace GLEngine
 {
 
 class ShaderProgram;
+class Logger;
 
 /*! @brief Represents a vertex shader
  */
@@ -20,7 +23,7 @@ private:
      *
      *  @param fileName The name of the file to be loaded
      */
-    VertexShader(const std::string& fileName);
+    VertexShader(std::shared_ptr<Logger> logger, const std::string& fileName);
     
     GLuint createShader();
 };

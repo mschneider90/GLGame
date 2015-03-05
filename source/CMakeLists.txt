@@ -12,9 +12,9 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 endif()
 
 # GLGame executable and library linkage
-add_executable(GLGame ./game/src/main.cpp)
+add_executable(GLGame ./game/src/main.cpp ./game/src/game.cpp)
 include_directories(${PROJECT_SOURCE_DIR})
-target_link_libraries(GLGame game input graphics util)
+target_link_libraries(GLGame GLEngine)
 
 # Copy the executable to the bin/ folder
 install( PROGRAMS ${CMAKE_BINARY_DIR}/GLGame DESTINATION ${CMAKE_BINARY_DIR}/../bin/ )

@@ -11,7 +11,7 @@ using GLEngine::VertexShader;
 using GLEngine::FragmentShader;
 using GLEngine::Logger;
 
-ShaderManager::ShaderManager()
+ShaderManager::ShaderManager(std::shared_ptr<Logger> logger) : m_logger(logger)
 {
 
 }
@@ -34,11 +34,11 @@ ShaderManager::makeShaderProgram(const std::string& vsPath,
     {
         auto vsIter = vertexShaderCache.find(vsPath);
         if (vsIter == vertexShaderCache.end()) { // not already loaded, create a new one
-            Logger::logMessage(std::string("Shader cache miss, loading ").append(vsPath));
-            vertexShaderCache.emplace(vsPath, std::unique_ptr<VertexShader>(new VertexShader(vsPath)));
+            m_logger->logMessage(std::string("Shader cache miss, loading ").append(vsPath));
+            vertexShaderCache.emplace(vsPath, std::unique_ptr<VertexShader>(new VertexShader(m_logger, vsPath)));
         }
         else {
-            Logger::logMessage(std::string("Shader cache hit, already loaded ").append(vsPath));
+            m_logger->logMessage(std::string("Shader cache hit, already loaded ").append(vsPath));
             vsPtr = (vsIter->second).get();
         }
     }
@@ -48,20 +48,20 @@ ShaderManager::makeShaderProgram(const std::string& vsPath,
     {
         auto fsIter = fragmentShaderCache.find(fsPath);
         if (fsIter == fragmentShaderCache.end()) {
-            Logger::logMessage(std::string("Shader cache miss, loading ").append(fsPath));
-            fragmentShaderCache.emplace(fsPath, std::unique_ptr<FragmentShader>(new FragmentShader(fsPath)));
+            m_logger->logMessage(std::string("Shader cache miss, loading ").append(fsPath));
+            fragmentShaderCache.emplace(fsPath, std::unique_ptr<FragmentShader>(new FragmentShader(m_logger, fsPath)));
         }
         else {
-            Logger::logMessage(std::string("Shader cache hit, already loaded ").append(fsPath));
+            m_logger->logMessage(std::string("Shader cache hit, already loaded ").append(fsPath));
             fsPtr = (fsIter->second).get();
         }
     }
     
-    Logger::logMessage(std::string("Linking shaders ")
+    m_logger->logMessage(std::string("Linking shaders ")
                                      .append(vsPath)
                                      .append(" and ")
                                      .append(fsPath));
                                      
-    return std::unique_ptr<ShaderProgram>(new ShaderProgram(*vsPtr, *fsPtr));
+    return std::unique_ptr<ShaderProgram>(new ShaderProgram(m_logger, *vsPtr, *fsPtr));
 }
 

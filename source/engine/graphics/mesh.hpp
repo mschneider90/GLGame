@@ -5,9 +5,12 @@
 #include "engine/util/gl.hpp"
 
 #include <vector>
+#include <memory>
 
 namespace GLEngine
 {
+
+class Logger;
 
 /*! @brief Represents mesh which is a collection of vertices that define a shape
  */
@@ -16,7 +19,7 @@ class Mesh
 public:
     /*! @brief Create a mesh from a list of vertices
      */
-    Mesh(const std::vector<Vec3>& vertices);
+    Mesh(std::shared_ptr<Logger> logger, const std::vector<Vec3>& vertices);
     
     /*! @brief Destroy the mesh
      */
@@ -32,6 +35,7 @@ public:
 private:
     unsigned int numVertices;
     GLuint attributeIndex;
+    std::shared_ptr<Logger> m_logger;
 };
 
 }

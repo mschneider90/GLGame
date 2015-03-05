@@ -8,7 +8,12 @@
 #include <stdexcept>
 #include <string>
 
-GLEngine::Graphics::Graphics(const std::string& windowTitle, const Resolution& windowRes, int windowSamples)
+using GLEngine::Graphics;
+
+GLEngine::Graphics::Graphics(std::shared_ptr<Logger> logger, 
+                             const std::string& windowTitle,
+                             const Resolution& windowRes,
+                             int windowSamples) : m_logger(logger)
 {
     glfwSetErrorCallback(glfwErrorCallback);
     if (!glfwInit()) {
@@ -22,7 +27,7 @@ GLEngine::Graphics::Graphics(const std::string& windowTitle, const Resolution& w
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     
     // OpenGL context is alive after this call
-    m_window = std::unique_ptr<GLEngine::Window>(new GLEngine::Window(windowTitle, windowRes));
+    m_window = std::shared_ptr<GLEngine::Window>(new GLEngine::Window(windowTitle, windowRes));
 
     // GLEW handles openGL extensions
     glewExperimental = GL_TRUE;
@@ -32,26 +37,30 @@ GLEngine::Graphics::Graphics(const std::string& windowTitle, const Resolution& w
     
     // 4x antialiasing
     glfwWindowHint(GLFW_SAMPLES, windowSamples);
-    
-    m_shaderMan = std::unique_ptr<GLEngine::ShaderManager>(new GLEngine::ShaderManager());
 }
 
 GLEngine::Graphics::~Graphics()
 {
     m_shaderMan.reset();
+    if (!m_window.unique()) {
+        m_logger->logMessage("graphics: window should not be kept alive past graphics, destroying now");
+    }
     m_window.reset();
     glfwTerminate();
 }
 
-GLEngine::Window& GLEngine::Graphics::getWindowInstance()
+std::shared_ptr<GLEngine::Window> GLEngine::Graphics::getWindowInstance()
 {
-    return *m_window;
+    return m_window;
 }
 
 std::unique_ptr<GLEngine::ShaderProgram> 
 GLEngine::Graphics::makeShaderProgram(const std::string& vsPath,
                                       const std::string& fsPath)
 {
+    if (!m_shaderMan) {         
+        m_shaderMan = std::unique_ptr<GLEngine::ShaderManager>(new GLEngine::ShaderManager(m_logger));
+    }
     return m_shaderMan->makeShaderProgram(vsPath, fsPath);
 }
 
@@ -82,8 +91,11 @@ std::string GLEngine::Graphics::getOpenGLVersion()
     return reinterpret_cast<const char*>(glGetString(GL_VERSION));
 }
 
+#include "engine/engine.hpp"
+using GLEngine::Engine;
 void glfwErrorCallback(int error, const char* msg) 
 {
-    GLEngine::Logger::logMessage(msg);
+    // have to access logger globally from here pls dont do this
+    Engine::getEngineInstance()->getLoggerInstance()->logMessage(msg);
 }
 

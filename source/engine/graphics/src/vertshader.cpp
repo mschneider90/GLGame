@@ -1,6 +1,7 @@
 #include "engine/graphics/vertshader.hpp"
 
-GLEngine::VertexShader::VertexShader(const std::string& fileName) : Shader(fileName)
+GLEngine::VertexShader::VertexShader(std::shared_ptr<Logger> logger,
+                                     const std::string& fileName) : Shader(logger, fileName)
 {
 
 }

@@ -54,7 +54,7 @@ if (NOT LIB_XCR)
 endif()
 
 include_directories(../.)
-add_library(graphics
+add_library(GLEngineGraphics
             graphics.cpp
             window.cpp
             shader.cpp
@@ -65,7 +65,7 @@ add_library(graphics
             shaderman.cpp
            )
 
-target_link_libraries(graphics
+target_link_libraries(GLEngineGraphics
                       ${GLFW_LIBRARIES}
                       ${GLEW_LIBRARIES}
                       ${OPENGL_LIBRARIES}

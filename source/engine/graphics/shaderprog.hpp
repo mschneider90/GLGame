@@ -14,6 +14,7 @@ namespace GLEngine
 class ShaderManager;
 class VertexShader;
 class FragmentShader;
+class Logger;
 
 /*! @brief Represents a shader program, which links a vertex shader and fragment shader
  */
@@ -34,10 +35,12 @@ private:
      *  @param The path to the vertex shader file on disk
      *  @param The path to the fragment shader file on disk
      */
-    ShaderProgram(VertexShader& vs,
+    ShaderProgram(std::shared_ptr<Logger> logger,
+                  VertexShader& vs,
                   FragmentShader& fs);
                   
     GLuint programIndex;
+    std::shared_ptr<Logger> m_logger;
 };
 
 }

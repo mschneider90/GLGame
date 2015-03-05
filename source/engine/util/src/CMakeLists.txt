@@ -1,2 +1,2 @@
 include_directories(../.)
-add_library(util logger.cpp)
+add_library(GLEngineUtil logger.cpp)

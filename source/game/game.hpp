@@ -1,13 +1,12 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "engine/graphics/graphics.hpp"
-#include "engine/input/input.hpp"
+#include "engine/engine.hpp"
 
 class Game
 {
 public:
-    static void play();
+    static void play(GLEngine::Engine& engine);
 private:
     Game() {};
     ~Game() {};

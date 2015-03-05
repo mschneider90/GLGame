@@ -1,5 +1,6 @@
 #include "game/game.hpp"
 
+#include "engine/engine.hpp"
 #include "engine/input/keys.hpp"
 #include "engine/graphics/graphics.hpp"
 #include "engine/graphics/window.hpp"
@@ -16,32 +17,28 @@
 
 using namespace GLEngine;
 
-void Game::play()
+void Game::play(Engine& engine)
 {
-    Logger::logMessage("Beginning OpenGL initialization...");
-    
     // TODO init sound object and other game objects
-    Graphics graphics("GLGame", Resolution { 640, 480 }, 4);
-    Window& window = graphics.getWindowInstance();
-    Input& input = window.getInputInstance();
-
-    Logger::logMessage("OpenGL initialization complete");
-    Logger::logMessage(std::string("GPU    : ").append(graphics.getRendererName()));
-    Logger::logMessage(std::string("OpenGL : ").append(graphics.getOpenGLVersion()));
+    std::shared_ptr<Logger> logger = engine.getLoggerInstance();
+    std::shared_ptr<Graphics> graphics = engine.getGraphicsInstance(Resolution { 640, 480 }, 4);
+    std::shared_ptr<Window> window = graphics->getWindowInstance();
+    Input& input = window->getInputInstance();
     
     // TEMPORARY CODE
-    std::unique_ptr<ShaderProgram> prog = graphics.makeShaderProgram("data/test_vs.glsl", "data/test_fs.glsl");
-    std::unique_ptr<ShaderProgram> prog2 = graphics.makeShaderProgram("data/test_vs.glsl", "data/test_fs.glsl");
+    std::unique_ptr<ShaderProgram> prog = graphics->makeShaderProgram("data/test_vs.glsl", "data/test_fs.glsl");
+    std::unique_ptr<ShaderProgram> prog2 = graphics->makeShaderProgram("data/test_vs.glsl", "data/test_fs.glsl");
     std::vector<Vec3> vertices = { Vec3{ 0.0f,  .5f, 0.0f},
                                    Vec3{  .5f, -.5f, 0.0f},
                                    Vec3{ -.5f, -.5f, 0.0f} };
-    Mesh mesh(vertices);
+    // temp pls dont do this
+    Mesh mesh(logger, vertices);
 
     // main game loop goes here
-    Logger::logMessage("Entering game loop...");
+    logger->logMessage("Entering game loop...");
     bool exit = false;
     while (!exit) {
-        graphics.clearFrameBuffer();
+        graphics->clearFrameBuffer();
         
         // check for input
         input.pollEvents();
@@ -52,11 +49,11 @@ void Game::play()
         // update game state (TODO)
         
         // draw stuff
-        graphics.draw(mesh, *prog);
+        graphics->draw(mesh, *prog);
         
-        graphics.swapFrameBuffer();
+        graphics->swapFrameBuffer();
     }
     
-    Logger::logMessage("Exiting game loop...");
+    logger->logMessage("Exiting game loop...");
 }
 

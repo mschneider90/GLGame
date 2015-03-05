@@ -4,37 +4,49 @@
 #include <stdexcept>
 #include <mutex>
 
-std::vector<std::string> GLEngine::Logger::log;
-bool GLEngine::Logger::isOpen = false;
+using GLEngine::Logger;
 
-GLEngine::Logger::Logger(const std::string& fileName)
+Logger::Logger(bool forceCritical) : m_forceCritical(forceCritical), m_msgNum(0)
 {
-    openMutex.lock();
-    if (isOpen) {
-        throw std::runtime_error("Only one logger instance allowed");
-    }
-    isOpen = true;
-    openMutex.unlock();
-    logFile.open(fileName);
+    m_logFile.open(FILE_NAME);
 }
 
-GLEngine::Logger::~Logger()
+Logger::~Logger()
 {
     // Dump the message log to disk
-    for (std::string msg : log)
+    m_logFile.seekp(std::ios_base::beg);
+    for (std::string msg : m_log)
     {
-        logFile << msg << std::endl;
+        m_logFile << msg << std::endl;
     }
-    logFile.close();
+    m_logFile.close();
 }
 
-void GLEngine::Logger::logMessage(std::string msg)
+void Logger::logMessage(std::string message, bool incrementCount, bool critical)
 {
-    static std::mutex logMutex;
+    m_access.lock();
     
-    if (isOpen) {
-        logMutex.lock();
-        log.push_back(msg);
-        logMutex.unlock();
+    std::string formattedMessage = formatMessage(message);
+    if (critical || m_forceCritical) {
+        m_logFile << formattedMessage << std::endl;
     }
+    m_log.push_back(formattedMessage);
+    if (incrementCount) {
+        m_msgNum++;
+    }
+    
+    m_access.unlock();
 }
+
+std::string Logger::formatMessage(const std::string& message)
+{
+    std::string formattedMessage = std::to_string(m_msgNum);
+    formattedMessage.append(" >> ");
+    formattedMessage.append(message);
+    return formattedMessage;
+}
+
+std::string Logger::getLogFileName() {
+    return FILE_NAME;
+}
+
