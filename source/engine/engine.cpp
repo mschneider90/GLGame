@@ -3,8 +3,6 @@
 #include "engine/util/logger.hpp"
 
 #include <mutex>
-// TEMP
-#include <iostream>
 
 using GLEngine::Engine;
 using GLEngine::Graphics;
