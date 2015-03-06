@@ -35,14 +35,17 @@ Mesh::Mesh(std::shared_ptr<Logger> logger, const std::vector<Vec3>& vertices) : 
     glBufferData(GL_ARRAY_BUFFER, points.size() * sizeof (float), points.data(), GL_STATIC_DRAW);
     
     // Generate vertex attribute object
-    attributeIndex = 0;
     const int NUM_ARRAYS = 1;
+    const int ATTRIBUTE_LOCATION = 0;
+    const int STRIDE = 0;
+    const void* OFFSET = nullptr;
+    attributeIndex = 0;
+    
     glGenVertexArrays(NUM_ARRAYS, &attributeIndex);
     glBindVertexArray(attributeIndex);
-    glEnableVertexAttribArray (0);
-    glBindBuffer (GL_ARRAY_BUFFER, bufferIndex);
-    // TODO
-    glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glEnableVertexAttribArray(ATTRIBUTE_LOCATION);
+    glBindBuffer(GL_ARRAY_BUFFER, bufferIndex);
+    glVertexAttribPointer(ATTRIBUTE_LOCATION, numVertices, GL_FLOAT, GL_FALSE, STRIDE, OFFSET);
 }
 
 Mesh::~Mesh()
