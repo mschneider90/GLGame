@@ -38,7 +38,7 @@ void Logger::logMessage(std::string message, bool incrementCount, bool critical)
     m_access.unlock();
 }
 
-std::string Logger::formatMessage(const std::string& message)
+std::string Logger::formatMessage(const std::string& message) const
 {
     std::string formattedMessage = std::to_string(m_msgNum);
     formattedMessage.append(" >> ");
@@ -46,7 +46,7 @@ std::string Logger::formatMessage(const std::string& message)
     return formattedMessage;
 }
 
-std::string Logger::getLogFileName() {
+std::string Logger::getLogFileName() const {
     return FILE_NAME;
 }
 

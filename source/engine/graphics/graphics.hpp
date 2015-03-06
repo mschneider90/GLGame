@@ -34,7 +34,7 @@ public:
      *  
      *  @return A reference to the Window.
      */
-    std::shared_ptr<Window> getWindowInstance();
+    std::shared_ptr<Window> getWindowInstance() const;
     
     /*! @brief Create a ShaderProgram from the specified source files
      */
@@ -60,13 +60,13 @@ public:
      *
      *  @return The name of the renderer (GPU)
      */
-    std::string getRendererName();
+    std::string getRendererName() const;
 
     /*! @brief Get the OpenGL Version
      *
      *  @return The OpenGL version
      */
-    std::string getOpenGLVersion();
+    std::string getOpenGLVersion() const;
 
 private:
     /*! @brief Intanstiate a Graphics object

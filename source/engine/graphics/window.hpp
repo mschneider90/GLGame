@@ -40,7 +40,7 @@ private:
 
     Window(std::shared_ptr<Logger> logger, const std::string& title, const Resolution& res);
     
-    GLFWwindow* getGLFWwindow();
+    GLFWwindow* getGLFWwindow() const;
     GLFWwindow* m_window;
 
     std::shared_ptr<Input> m_input;

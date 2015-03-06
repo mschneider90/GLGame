@@ -54,7 +54,7 @@ Graphics::~Graphics()
     glfwTerminate();
 }
 
-std::shared_ptr<Window> Graphics::getWindowInstance()
+std::shared_ptr<Window> Graphics::getWindowInstance() const
 {
     return m_window;
 }
@@ -92,12 +92,12 @@ void Graphics::clearFrameBuffer()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-std::string Graphics::getRendererName()
+std::string Graphics::getRendererName() const
 {
     return reinterpret_cast<const char*>(glGetString(GL_RENDERER));
 }
 
-std::string Graphics::getOpenGLVersion()
+std::string Graphics::getOpenGLVersion() const
 {
     return reinterpret_cast<const char*>(glGetString(GL_VERSION));
 }

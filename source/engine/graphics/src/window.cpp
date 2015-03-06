@@ -44,7 +44,7 @@ std::shared_ptr<Input> Window::getInputInstance()
     return m_input;
 }
 
-GLFWwindow* Window::getGLFWwindow() {
+GLFWwindow* Window::getGLFWwindow() const {
     return m_window;
 }
 

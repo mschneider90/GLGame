@@ -34,7 +34,7 @@ public:
      *
      *  @return The name of the log file on disk
      */
-    std::string getLogFileName();
+    std::string getLogFileName() const;
 private:
     /*! @brief Instantiate the Logger
      * 
@@ -44,7 +44,7 @@ private:
     
     /*! @brief Format the message
      */
-    std::string formatMessage(const std::string& msg);
+    std::string formatMessage(const std::string& msg) const;
     
     Logger(const Logger&) = delete;
     Logger& operator=(const Logger&) = delete;
