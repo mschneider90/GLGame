@@ -33,8 +33,8 @@ public:
      */
     unsigned int getAttributeIndex() const;
 private:
-    Mesh(Mesh&) = delete;
-    Mesh& operator=(Mesh&) = delete;
+    Mesh(const Mesh&) = delete;
+    Mesh& operator=(const Mesh&) = delete;
     
     unsigned int numVertices;
     GLuint attributeIndex;

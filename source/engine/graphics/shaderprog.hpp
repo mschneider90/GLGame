@@ -39,8 +39,8 @@ private:
                   VertexShader& vs,
                   FragmentShader& fs);
                   
-    ShaderProgram(ShaderProgram&) = delete;
-    ShaderProgram& operator=(ShaderProgram&) = delete;
+    ShaderProgram(const ShaderProgram&) = delete;
+    ShaderProgram& operator=(const ShaderProgram&) = delete;
                   
     GLuint programIndex;
     std::shared_ptr<Logger> m_logger;

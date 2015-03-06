@@ -29,8 +29,8 @@ private:
      */
     ShaderManager(std::shared_ptr<Logger> logger);
     
-    ShaderManager(ShaderManager&) = delete;
-    ShaderManager& operator=(ShaderManager&) = delete;
+    ShaderManager(const ShaderManager&) = delete;
+    ShaderManager& operator=(const ShaderManager&) = delete;
     
     std::map<std::string, std::unique_ptr<VertexShader>> vertexShaderCache;
     std::map<std::string, std::unique_ptr<FragmentShader>> fragmentShaderCache;

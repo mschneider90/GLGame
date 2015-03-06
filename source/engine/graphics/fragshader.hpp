@@ -25,8 +25,8 @@ private:
      */
     FragmentShader(std::shared_ptr<Logger> logger, const std::string& fileName);
     
-    FragmentShader(FragmentShader&) = delete;
-    FragmentShader& operator=(FragmentShader&) = delete;
+    FragmentShader(const FragmentShader&) = delete;
+    FragmentShader& operator=(const FragmentShader&) = delete;
     
     GLuint createShader();
 };
