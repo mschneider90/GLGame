@@ -6,7 +6,7 @@
 
 using GLEngine::Logger;
 
-Logger::Logger(bool forceCritical) : m_forceCritical(forceCritical), m_msgNum(0)
+Logger::Logger(bool forceCritical) : m_forceCritical(forceCritical)
 {
     m_logFile.open(FILE_NAME);
 }
@@ -22,26 +22,28 @@ Logger::~Logger()
     m_logFile.close();
 }
 
-void Logger::logMessage(std::string message, bool incrementCount, bool critical)
+void Logger::logMessage(std::string message, bool newSection, bool critical)
 {
     m_access.lock();
     
-    std::string formattedMessage = formatMessage(message);
+    std::string formattedMessage = formatMessage(message, newSection);
     if (critical || m_forceCritical) {
         m_logFile << formattedMessage << std::endl;
     }
     m_log.push_back(formattedMessage);
-    if (incrementCount) {
-        m_msgNum++;
-    }
     
     m_access.unlock();
 }
 
-std::string Logger::formatMessage(const std::string& message) const
+std::string Logger::formatMessage(const std::string& message, bool newSection) const
 {
-    std::string formattedMessage = std::to_string(m_msgNum);
-    formattedMessage.append(" >> ");
+    std::string formattedMessage;
+    if (newSection) {
+        formattedMessage.append(" >> ");
+    }
+    else {
+        formattedMessage.append("    ");
+    }
     formattedMessage.append(message);
     return formattedMessage;
 }

@@ -6,12 +6,8 @@
 #include "engine/graphics/window.hpp"
 #include "engine/util/logger.hpp"
 #include "engine/util/resolution.hpp"
-
-// TEMP FOR TESTING
-#include "engine/graphics/shaderprog.hpp"
-#include "engine/graphics/shaderman.hpp"
-#include "engine/graphics/mesh.hpp"
 #include "engine/util/vectors.hpp"
+#include "engine/graphics/sprite.hpp"
 
 using namespace GLEngine;
 
@@ -23,13 +19,7 @@ void Game::play(Engine& engine)
     std::shared_ptr<Window> window = graphics->getWindowInstance();
     std::shared_ptr<Input> input = window->getInputInstance();
     
-    // TEMPORARY CODE
-    std::unique_ptr<ShaderProgram> prog = graphics->makeShaderProgram("data/test_vs.glsl", "data/test_fs.glsl");
-    std::unique_ptr<ShaderProgram> prog2 = graphics->makeShaderProgram("data/test_vs.glsl", "data/test_fs.glsl");
-    std::vector<Vec3> vertices = { Vec3{ 0.0f,  .5f, 0.0f},
-                                   Vec3{  .5f, -.5f, 0.0f},
-                                   Vec3{ -.5f, -.5f, 0.0f} };
-    std::unique_ptr<Mesh> mesh = graphics->makeMesh(vertices);
+    Sprite sprite(graphics, Vec3 { 0, 0, 0}, Resolution { 64, 64});
 
     // main game loop goes here
     logger->logMessage("Entering game loop...");
@@ -46,7 +36,7 @@ void Game::play(Engine& engine)
         // update game state (TODO)
         
         // draw stuff
-        graphics->draw(*mesh, *prog);
+        sprite.draw();
         
         graphics->swapFrameBuffer();
     }

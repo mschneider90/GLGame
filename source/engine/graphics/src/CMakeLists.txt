@@ -63,6 +63,7 @@ add_library(GLEngineGraphics
             shaderprog.cpp
             mesh.cpp
             shaderman.cpp
+            sprite.cpp
            )
 
 target_link_libraries(GLEngineGraphics

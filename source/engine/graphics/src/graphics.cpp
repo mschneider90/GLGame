@@ -20,6 +20,8 @@ Graphics::Graphics(std::shared_ptr<Logger> logger,
                              const Resolution& windowRes,
                              int windowSamples) : m_logger(logger)
 {
+    logger->logMessage("Initializing openGL...");
+    
     glfwSetErrorCallback(glfwErrorCallback);
     if (!glfwInit()) {
         throw std::runtime_error("graphics: glfw initialization failed");
@@ -42,6 +44,10 @@ Graphics::Graphics(std::shared_ptr<Logger> logger,
     
     // set antialiasing
     glfwWindowHint(GLFW_SAMPLES, windowSamples);
+    
+    logger->logMessage("OpenGL initialization OK");
+    logger->logMessage(getRendererName(), false);
+    logger->logMessage(getOpenGLVersion(), false);
 }
 
 Graphics::~Graphics()

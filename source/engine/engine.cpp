@@ -21,13 +21,6 @@ Engine::~Engine()
         }
         graphics.reset();
     }
-    
-    if (!logger.unique()) {
-        if (logger) {
-            logger->logMessage("engine: logger should not live beyond engine, deleting now");
-        }
-        logger.reset();
-    }
 }
 
 std::shared_ptr<Engine> Engine::getEngineInstance()

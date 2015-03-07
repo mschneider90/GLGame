@@ -25,10 +25,10 @@ public:
     /*! @brief Log a message
      * 
      *  @param message The message to be logged
-     *  @param incrementCount Increment the message count
+     *  @param newSection Start a new message section
      *  @param critical Is this a critical message
      */
-    void logMessage(std::string message, bool incrementCount = true, bool critical = false);
+    void logMessage(std::string message, bool newSection = true, bool critical = false);
     
     /*! @brief Get the log file name
      *
@@ -44,7 +44,7 @@ private:
     
     /*! @brief Format the message
      */
-    std::string formatMessage(const std::string& msg) const;
+    std::string formatMessage(const std::string& msg, bool newSection) const;
     
     Logger(const Logger&) = delete;
     Logger& operator=(const Logger&) = delete;
@@ -53,7 +53,6 @@ private:
     
     std::vector<std::string> m_log;
     bool m_forceCritical;
-    unsigned int m_msgNum;
     std::mutex m_access;
     std::ofstream m_logFile;
 };
